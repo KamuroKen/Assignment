@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bgmd1rdck6mba"]
+
+[ext_resource type="PackedScene" uid="uid://6wcdtwxdqm37" path="res://models/building_suburban/driveway-short.glb" id="1_tosl3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwu13"]
+size = Vector3(0.7229004, 0.015625, 0.39968872)
+
+[node name="diveway_short" type="StaticBody3D" unique_id=466786384]
+
+[node name="driveway-short2" parent="." unique_id=467874781 instance=ExtResource("1_tosl3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1917665442]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00036621094, 0.0068359375, -0.0014801025)
+shape = SubResource("BoxShape3D_mwu13")

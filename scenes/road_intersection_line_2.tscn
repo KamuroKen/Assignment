@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bblocts6cyib1"]
+
+[ext_resource type="PackedScene" uid="uid://bb4xfxxx6x72h" path="res://models/roads/road-intersection-line.glb" id="1_kyg5r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4bgph"]
+size = Vector3(1, 0.008728027, 1)
+
+[node name="road_intersection_line2" type="StaticBody3D" unique_id=1706418226]
+
+[node name="road-intersection-line2" parent="." unique_id=174876352 instance=ExtResource("1_kyg5r")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2112338673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005279541, 0)
+shape = SubResource("BoxShape3D_4bgph")

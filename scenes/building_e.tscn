@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c5342cbyi0bpv"]
+
+[ext_resource type="PackedScene" uid="uid://bmb5gwwr42q0o" path="res://models/building_suburban/building-type-e.glb" id="1_rlk6b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cu86w"]
+size = Vector3(1.2520142, 1.1562195, 0.87109375)
+
+[node name="building_e" type="StaticBody3D" unique_id=349475799]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=58288945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023498535, 0.5692291, 0.064453125)
+shape = SubResource("BoxShape3D_cu86w")
+
+[node name="building-type-e2" parent="." unique_id=196381192 instance=ExtResource("1_rlk6b")]

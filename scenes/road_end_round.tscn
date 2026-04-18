@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dt5d7ncuvgbkv"]
+
+[ext_resource type="PackedScene" uid="uid://do2nrcpv03bgd" path="res://models/roads/road-end-round.glb" id="1_p31ws"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxede"]
+size = Vector3(1, 0.009643555, 1)
+
+[node name="road_end_round" type="StaticBody3D" unique_id=1574294472]
+
+[node name="road-end-round2" parent="." unique_id=1170577656 instance=ExtResource("1_p31ws")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1194890708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001475215, 0.005279511, 0.00062167645)
+shape = SubResource("BoxShape3D_gxede")

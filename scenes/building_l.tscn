@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://circruv5fxv7o"]
+
+[ext_resource type="PackedScene" uid="uid://b0plvld31qrmk" path="res://models/building_suburban/building-type-l.glb" id="1_ckyhw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66rux"]
+size = Vector3(0.84106445, 1.1514893, 0.836853)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lmgws"]
+height = 0.78235155
+radius = 0.027832031
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gbbxp"]
+size = Vector3(0.56541824, 0.06607056, 0.5701294)
+
+[node name="building_l" type="StaticBody3D" unique_id=1832515400]
+
+[node name="building-type-l2" parent="." unique_id=803364283 instance=ExtResource("1_ckyhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059794962, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1716513547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032958984, 0.57432073, 0.058013916)
+shape = SubResource("BoxShape3D_66rux")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=82612682]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43190557, 0.44330272, -0.28470463)
+shape = SubResource("CylinderShape3D_lmgws")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1968201762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28269386, 0.026565552, -0.22506714)
+shape = SubResource("BoxShape3D_gbbxp")

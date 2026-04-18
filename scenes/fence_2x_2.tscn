@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://tlixb1c6wajd"]
+
+[ext_resource type="PackedScene" uid="uid://p7laakqc1cb7" path="res://models/building_suburban/fence-2x2.glb" id="1_egvpm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tne4m"]
+size = Vector3(0.91075134, 0.48754883, 0.10479736)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qo68r"]
+size = Vector3(0.8747082, 0.48754883, 0.10479736)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ftelx"]
+size = Vector3(0.8747082, 0.48754883, 0.10479736)
+
+[node name="fence_2x2" type="StaticBody3D" unique_id=722390024]
+
+[node name="fence-2x22" parent="." unique_id=322471544 instance=ExtResource("1_egvpm")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2000479186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008552551, 0.2562256, 0.4170227)
+shape = SubResource("BoxShape3D_tne4m")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2062488906]
+transform = Transform3D(0.017818939, 0, -0.9998413, 0, 1, 0, 0.9998413, 0, 0.017818939, 0.40613717, 0.2562256, 0.013087566)
+shape = SubResource("BoxShape3D_qo68r")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=420462688]
+transform = Transform3D(0.017818939, 0, -0.9998413, 0, 1, 0, 0.9998413, 0, 0.017818939, -0.3911057, 0.2562256, 0.013087566)
+shape = SubResource("BoxShape3D_ftelx")
