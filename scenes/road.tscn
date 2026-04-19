@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://doxa4kuxv8odt" path="res://models/roads/road-straight.glb" id="1_mv8x7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_my2y2"]
-size = Vector3(1, 0.00793457, 1)
+size = Vector3(1, 0.065979004, 1)
 
 [node name="road" type="StaticBody3D" unique_id=1050192043]
 
 [node name="road-straight2" parent="." unique_id=2027566469 instance=ExtResource("1_mv8x7")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=951994910]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.003479004, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025543213, 0)
 shape = SubResource("BoxShape3D_my2y2")

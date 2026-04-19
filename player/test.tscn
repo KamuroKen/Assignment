@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://vsegol4nmte8"]
+
+[ext_resource type="PackedScene" path="res://test/player_3d_040_gravity_and_jump.tscn" id="1_mep1q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2op44"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8dskh"]
+sky_material = SubResource("ProceduralSkyMaterial_2op44")
+
+[sub_resource type="Environment" id="Environment_24hhg"]
+background_mode = 2
+sky = SubResource("Sky_8dskh")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D" unique_id=1787961458]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=45275965]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=402495255]
+environment = SubResource("Environment_24hhg")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=631677746]
+size = Vector3(20, 1, 20)
+
+[node name="Player3DGravityAndJump" parent="." unique_id=742646684 instance=ExtResource("1_mep1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8284683, 0)
+script = null
