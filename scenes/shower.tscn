@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://du8y7oqqhx80y"]
+
+[ext_resource type="PackedScene" uid="uid://dwcl1g2ev84il" path="res://models/furniture/showerRound.glb" id="1_k6fbq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k6fbq"]
+radius = 0.2763672
+height = 1.1705322
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6k2h"]
+size = Vector3(0.54751587, 0.49951172, 0.17877197)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mq4iw"]
+size = Vector3(0.5515747, 0.49597168, 0.18103027)
+
+[node name="shower" type="StaticBody3D" unique_id=1945744831]
+
+[node name="showerRound" parent="." unique_id=520076240 instance=ExtResource("1_k6fbq")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=978794946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34144384, 0.5437622, -0.35687342)
+shape = SubResource("CapsuleShape3D_k6fbq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2094072442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28600454, 0.25024414, -0.47139442)
+shape = SubResource("BoxShape3D_x6k2h")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1783980151]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.4774599, 0.25201416, -0.2881773)
+shape = SubResource("BoxShape3D_mq4iw")

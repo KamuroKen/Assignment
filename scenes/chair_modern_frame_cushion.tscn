@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d1bjr6jh60mat"]
+
+[ext_resource type="PackedScene" uid="uid://cgg3ym3njc2wp" path="res://models/furniture/chairModernFrameCushion.glb" id="1_a21nv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s6o4l"]
+size = Vector3(0.19976807, 0.4539795, 0.19946289)
+
+[node name="chairModernFrameCushion" type="StaticBody3D" unique_id=975024404]
+
+[node name="chairModernFrameCushion" parent="." unique_id=255351032 instance=ExtResource("1_a21nv")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=993145794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.098236084, 0.22613525, -0.10412598)
+shape = SubResource("BoxShape3D_s6o4l")

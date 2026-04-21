@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://nkfn1460rw0q"]
+
+[ext_resource type="PackedScene" uid="uid://d3k6wg624ulhx" path="res://models/building1/GLB format/wall-doorway-square.glb" id="1_84yns"]
+[ext_resource type="PackedScene" uid="uid://c0a3aay2pv5iu" path="res://models/building1/GLB format/door-rotate-square-d.glb" id="2_2aimg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6ny72"]
+size = Vector3(0.14691162, 2.3891068, 1.9916992)
+
+[node name="wall_doorway" type="StaticBody3D" unique_id=1260072215]
+
+[node name="wall-doorway-square2" parent="." unique_id=1419216220 instance=ExtResource("1_84yns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1918921, 0, 0)
+
+[node name="door-rotate-square-d2" parent="wall-doorway-square2" unique_id=877361933 instance=ExtResource("2_2aimg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0033923388, 0, -0.47084156)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=559274151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1878331, 1.2028923, 0.0017089844)
+shape = SubResource("BoxShape3D_6ny72")

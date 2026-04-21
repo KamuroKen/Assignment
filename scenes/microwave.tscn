@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dfknrdmb84gjc"]
+
+[ext_resource type="PackedScene" uid="uid://hawghcchdnhp" path="res://models/furniture/kitchenMicrowave.glb" id="1_qkcqp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqfsw"]
+size = Vector3(0.2935791, 0.18255615, 0.2244873)
+
+[node name="microwave" type="StaticBody3D" unique_id=298518827]
+
+[node name="kitchenMicrowave" parent="." unique_id=1202271476 instance=ExtResource("1_qkcqp")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1335468472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14520264, 0.092437744, -0.10296631)
+shape = SubResource("BoxShape3D_tqfsw")

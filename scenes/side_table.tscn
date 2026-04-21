@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cbl508wgrq7ey"]
+
+[ext_resource type="PackedScene" uid="uid://1p68sommlj2f" path="res://models/furniture/sideTable.glb" id="1_o3vas"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o280c"]
+size = Vector3(0.51727295, 0.3842163, 0.21936035)
+
+[node name="sideTable" type="StaticBody3D" unique_id=1159738236]
+
+[node name="sideTable" parent="." unique_id=968004096 instance=ExtResource("1_o3vas")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=119225356]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256073, 0.19296265, -0.09893799)
+shape = SubResource("BoxShape3D_o280c")

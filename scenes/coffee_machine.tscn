@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d2wxa2e84h63"]
+
+[ext_resource type="PackedScene" uid="uid://ycim0gcam2is" path="res://models/furniture/kitchenCoffeeMachine.glb" id="1_vqwbw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y23ww"]
+size = Vector3(0.18981934, 0.16625977, 0.24023438)
+
+[node name="CoffeeMachine" type="StaticBody3D" unique_id=737005931]
+
+[node name="kitchenCoffeeMachine" parent="." unique_id=1515971426 instance=ExtResource("1_vqwbw")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1268572138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09503174, 0.07922363, -0.12402344)
+shape = SubResource("BoxShape3D_y23ww")

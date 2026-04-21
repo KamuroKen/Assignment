@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b0k8mp4k4uq7r"]
+
+[ext_resource type="PackedScene" uid="uid://bcid7u67anh4g" path="res://models/furniture/chairDesk.glb" id="1_v2fp5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yqd4k"]
+size = Vector3(0.3336792, 0.6105957, 0.288208)
+
+[node name="chairDesk" type="StaticBody3D" unique_id=1479073680]
+
+[node name="chairDesk" parent="." unique_id=1698747523 instance=ExtResource("1_v2fp5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=333236092]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16629076, 0.30584717, -0.14722973)
+shape = SubResource("BoxShape3D_yqd4k")

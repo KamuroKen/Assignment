@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c6mrahjtadgf8"]
+
+[ext_resource type="PackedScene" uid="uid://dr7br71qjgk6k" path="res://models/furniture/kitchenBar.glb" id="1_0cu05"]
+[ext_resource type="PackedScene" uid="uid://dmm27ik2ckkk3" path="res://models/furniture/kitchenBarEnd.glb" id="2_1oepo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_buluw"]
+radius = 0.103027344
+height = 0.43719482
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_66dcr"]
+radius = 0.103027344
+height = 0.42126465
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j7ocb"]
+size = Vector3(0.9608154, 0.42092896, 0.2088623)
+
+[node name="KitchenBar" type="StaticBody3D" unique_id=971546305]
+
+[node name="kitchenBar" parent="." unique_id=1491323321 instance=ExtResource("1_0cu05")]
+
+[node name="kitchenBarEnd" parent="." unique_id=554330570 instance=ExtResource("2_1oepo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10136424, 0, 0)
+
+[node name="kitchenBarEnd2" parent="." unique_id=223873827 instance=ExtResource("2_1oepo")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.96131885, 0, -0.21015397)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=848013278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00334692, 0.21102905, -0.10291759)
+shape = SubResource("CapsuleShape3D_buluw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=324316380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8570281, 0.20770264, -0.10291759)
+shape = SubResource("CapsuleShape3D_66dcr")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=2144706565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42144775, 0.21229553, -0.10491943)
+shape = SubResource("BoxShape3D_j7ocb")
+
+[node name="kitchenBar2" parent="." unique_id=1275595244 instance=ExtResource("1_0cu05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4299879, 0, 0)

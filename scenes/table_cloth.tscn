@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dr0whami0ulw"]
+
+[ext_resource type="PackedScene" uid="uid://sas7uk4h2iat" path="res://models/furniture/tableCloth.glb" id="1_rn85i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aota2"]
+size = Vector3(0.8432617, 0.33544922, 0.44604492)
+
+[node name="tableCloth" type="StaticBody3D" unique_id=576207066]
+
+[node name="tableCloth" parent="." unique_id=355642158 instance=ExtResource("1_rn85i")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1404116576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42144275, 0.16088867, -0.2244873)
+shape = SubResource("BoxShape3D_aota2")

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bncwerrsq7g8v"]
+
+[ext_resource type="PackedScene" uid="uid://cs11m8foxeoqx" path="res://models/furniture/lampSquareFloor.glb" id="1_hitvc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1fvxy"]
+size = Vector3(0.123168945, 0.8569336, 0.12695313)
+
+[node name="lampSquareFloor" type="StaticBody3D" unique_id=1856880067]
+
+[node name="lampSquareFloor" parent="." unique_id=1374662834 instance=ExtResource("1_hitvc")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1311560817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.096191406, 0.47375488, 0)
+light_color = Color(0.95429856, 0.6729007, 0.6146796, 1)
+light_energy = 2.0
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 10.0
+spot_angle = 180.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1921053147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05999756, 0.4284668, -0.056640625)
+shape = SubResource("BoxShape3D_1fvxy")

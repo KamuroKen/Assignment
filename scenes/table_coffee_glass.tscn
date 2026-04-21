@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://lr3ain81chen"]
+
+[ext_resource type="PackedScene" uid="uid://dlvvphhfrclk1" path="res://models/furniture/tableCoffeeGlass.glb" id="1_5mn3y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5mn3y"]
+size = Vector3(0.66296387, 0.23486328, 0.39752197)
+
+[node name="tableCoffeeGlass" type="StaticBody3D" unique_id=1933244976]
+
+[node name="tableCoffeeGlass" parent="." unique_id=1820844323 instance=ExtResource("1_5mn3y")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=531381911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13092041, 0.11645508, -0.10293579)
+shape = SubResource("BoxShape3D_5mn3y")

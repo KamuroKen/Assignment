@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cu8mwqogl33jb"]
+
+[ext_resource type="PackedScene" uid="uid://bsdxs0lv0bcbl" path="res://models/furniture/lampWall.glb" id="1_giuow"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_all1l"]
+size = Vector3(0.22454834, 0.10055542, 0.14801025)
+
+[node name="lampWall" type="StaticBody3D" unique_id=277268311]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1365115547]
+transform = Transform3D(-0.99345875, 0.07592353, -0.08529569, -5.8125533e-08, 0.74695164, 0.6648784, 0.114191666, 0.6605293, -0.74206567, 0, 0.04607156, 0.13551775)
+light_color = Color(0.95232934, 0.90741426, 0.46886784, 1)
+shadow_enabled = true
+spot_angle = 75.0
+
+[node name="lampWall" parent="." unique_id=2112726801 instance=ExtResource("1_giuow")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1394695638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008239746, 0.048294067, 0.07333374)
+shape = SubResource("BoxShape3D_all1l")

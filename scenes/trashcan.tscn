@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://8a5pwfhre8ti"]
+
+[ext_resource type="PackedScene" uid="uid://crqol7tke42kw" path="res://models/furniture/trashcan.glb" id="1_dqkxp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1btkc"]
+radius = 0.10449219
+height = 0.4331665
+
+[node name="trashcan" type="StaticBody3D" unique_id=56980975]
+
+[node name="trashcan" parent="." unique_id=1568666911 instance=ExtResource("1_dqkxp")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1516559354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21768188, 0)
+shape = SubResource("CapsuleShape3D_1btkc")

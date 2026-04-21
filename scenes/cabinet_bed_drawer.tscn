@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c4hg58v52g5k1"]
+
+[ext_resource type="PackedScene" uid="uid://1f4tdvpt5wq" path="res://models/furniture/cabinetBedDrawer.glb" id="1_lgd70"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_elvnp"]
+size = Vector3(0.26538086, 0.26953125, 0.21429443)
+
+[node name="cabinetBedDrawer" type="StaticBody3D" unique_id=1189900181]
+
+[node name="cabinetBedDrawer" parent="." unique_id=1718221608 instance=ExtResource("1_lgd70")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2028204153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12365723, 0.12695313, -0.10140991)
+shape = SubResource("BoxShape3D_elvnp")

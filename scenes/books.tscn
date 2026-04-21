@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://8e7xa3ccwa63"]
+
+[ext_resource type="PackedScene" uid="uid://b1h422g4ntcr8" path="res://models/furniture/books.glb" id="1_lnngd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tevrl"]
+size = Vector3(0.15136719, 0.10473633, 0.09692383)
+
+[node name="books" type="StaticBody3D" unique_id=1341260518]
+
+[node name="books" parent="." unique_id=372199495 instance=ExtResource("1_lnngd")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1866267150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075683594, 0.05065918, -0.047729492)
+shape = SubResource("BoxShape3D_tevrl")

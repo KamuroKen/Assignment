@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cc5wnjpsegdb2"]
+
+[ext_resource type="PackedScene" uid="uid://cs8v7d4u4y4u5" path="res://models/furniture/washerDryerStacked.glb" id="1_814ap"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vq4c7"]
+size = Vector3(0.39556885, 0.9456787, 0.37054443)
+
+[node name="washerDryerStacked" type="StaticBody3D" unique_id=1750294543]
+
+[node name="washerDryerStacked" parent="." unique_id=988519622 instance=ExtResource("1_814ap")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=486431141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19393921, 0.47576904, -0.17269897)
+shape = SubResource("BoxShape3D_vq4c7")

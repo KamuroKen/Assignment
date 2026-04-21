@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://lcu8a0u8287j"]
+
+[ext_resource type="PackedScene" uid="uid://d24jf5x5xshhe" path="res://models/furniture/speaker.glb" id="1_6jdiy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1qhi"]
+size = Vector3(0.14459229, 0.6378784, 0.12878418)
+
+[node name="speaker" type="StaticBody3D" unique_id=981002499]
+
+[node name="speaker" parent="." unique_id=1009434398 instance=ExtResource("1_6jdiy")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=883053837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07235718, 0.3246765, -0.074645996)
+shape = SubResource("BoxShape3D_e1qhi")

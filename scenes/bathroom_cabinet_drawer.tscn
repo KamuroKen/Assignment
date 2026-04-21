@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cvv0vktky4sg1"]
+
+[ext_resource type="PackedScene" uid="uid://d3if5uqrrdhxd" path="res://models/furniture/bathroomCabinetDrawer.glb" id="1_je0w1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y2obd"]
+size = Vector3(0.43804932, 0.44836426, 0.3232422)
+
+[node name="bathroomCabinetDrawer" type="StaticBody3D" unique_id=664140959]
+
+[node name="bathroomCabinetDrawer" parent="." unique_id=916398579 instance=ExtResource("1_je0w1")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=47409644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21542358, 0.27581787, -0.29223633)
+shape = SubResource("BoxShape3D_y2obd")

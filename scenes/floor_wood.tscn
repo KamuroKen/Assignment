@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://djuhpprdpfq76"]
+
+[ext_resource type="PackedScene" uid="uid://dnr4dmygfbyv8" path="res://models/furniture/floorFull.glb" id="1_i0wpl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ouc7c"]
+size = Vector3(0.994812, 0.052001953, 1.0005798)
+
+[node name="floor_wood" type="StaticBody3D" unique_id=1555912602]
+
+[node name="floorFull" parent="." unique_id=1752348778 instance=ExtResource("1_i0wpl")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=113307022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5036316, 0.02355957, -0.5028229)
+shape = SubResource("BoxShape3D_ouc7c")

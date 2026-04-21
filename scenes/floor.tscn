@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d1pompco008cm"]
+
+[ext_resource type="PackedScene" uid="uid://dthupvhhnbxva" path="res://models/building1/GLB format/floor.glb" id="1_oj3tl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgngl"]
+size = Vector3(2.0024242, 0.100666046, 2.0587735)
+
+[node name="floor" type="StaticBody3D" unique_id=1198345482]
+
+[node name="floor2" parent="." unique_id=841156785 instance=ExtResource("1_oj3tl")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1336605475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0028944016, 0.05466652, -0.031730413)
+shape = SubResource("BoxShape3D_cgngl")

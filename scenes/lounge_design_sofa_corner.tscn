@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://7a7lkvaikcf7"]
+
+[ext_resource type="PackedScene" uid="uid://c75oss3qhq81w" path="res://models/furniture/loungeDesignSofaCorner.glb" id="1_ww20f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6vr87"]
+size = Vector3(0.40667725, 0.38745117, 1.362915)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sg7vm"]
+size = Vector3(0.40667725, 0.40179443, 1.343689)
+
+[node name="loungeDesignSofaCorner" type="StaticBody3D" unique_id=421407358]
+
+[node name="loungeDesignSofaCorner" parent="." unique_id=2138100737 instance=ExtResource("1_ww20f")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1278382047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1408701, 0.20397949, -0.6749878)
+shape = SubResource("BoxShape3D_6vr87")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=987452220]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.6768732, 0.20175171, -1.1389375)
+shape = SubResource("BoxShape3D_sg7vm")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cmdapof2eih8i"]
+
+[ext_resource type="PackedScene" uid="uid://do80ico8xuxn4" path="res://models/furniture/kitchenCabinetUpperDouble.glb" id="1_hlxbq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ltdyp"]
+size = Vector3(0.434021, 0.38757324, 0.21264648)
+
+[node name="kitchenCabinetUpperDouble" type="StaticBody3D" unique_id=357048501]
+
+[node name="kitchenCabinetUpperDouble" parent="." unique_id=1802700045 instance=ExtResource("1_hlxbq")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=710257272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21377563, 0.19244385, -0.107788086)
+shape = SubResource("BoxShape3D_ltdyp")

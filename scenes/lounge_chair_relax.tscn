@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cyqm3gqn6182o"]
+
+[ext_resource type="PackedScene" uid="uid://dxu4i3bh4xp22" path="res://models/furniture/loungeChairRelax.glb" id="1_cxgw3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1iwme"]
+size = Vector3(0.48883057, 0.6381836, 0.6263428)
+
+[node name="loungeChairRelax" type="StaticBody3D" unique_id=1874788600]
+
+[node name="loungeChairRelax" parent="." unique_id=939601525 instance=ExtResource("1_cxgw3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1499760954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24551392, 0.32250977, -0.31817627)
+shape = SubResource("BoxShape3D_1iwme")

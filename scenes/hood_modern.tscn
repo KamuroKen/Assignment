@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://tyt1kr3phv7"]
+
+[ext_resource type="PackedScene" uid="uid://baki7fhajbx52" path="res://models/furniture/hoodModern.glb" id="1_ogwch"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2iqe6"]
+size = Vector3(0.44439697, 0.40039063, 0.2883606)
+
+[node name="hoodModern" type="StaticBody3D" unique_id=1289780695]
+
+[node name="hoodModern" parent="." unique_id=233724673 instance=ExtResource("1_ogwch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42748368, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=901946913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6464679, 0.17382813, -0.1377716)
+shape = SubResource("BoxShape3D_2iqe6")

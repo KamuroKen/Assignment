@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dpeiugxpby34x"]
+
+[ext_resource type="PackedScene" uid="uid://dmy51m88p4tkp" path="res://models/furniture/paneling.glb" id="1_t8bok"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3o87c"]
+size = Vector3(0.4991455, 0.5982666, 0.033935547)
+
+[node name="paneling" type="StaticBody3D" unique_id=375348970]
+
+[node name="paneling" parent="." unique_id=1957983483 instance=ExtResource("1_t8bok")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=268880854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25042725, 0.29766846, 0.014526367)
+shape = SubResource("BoxShape3D_3o87c")

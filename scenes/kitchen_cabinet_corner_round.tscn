@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dulmtpr3q6jaj"]
+
+[ext_resource type="PackedScene" uid="uid://bufgh8x50nvrx" path="res://models/furniture/kitchenCabinetCornerRound.glb" id="1_0ulns"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gvtx"]
+size = Vector3(0.43780518, 0.4130249, 0.4272461)
+
+[node name="kitchenCabinetCornerRound" type="StaticBody3D" unique_id=1400839684]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467115262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23373413, 0.216156, -0.22509766)
+shape = SubResource("BoxShape3D_3gvtx")
+
+[node name="kitchenCabinetCornerRound" parent="." unique_id=2124917145 instance=ExtResource("1_0ulns")]

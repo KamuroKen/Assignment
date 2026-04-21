@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://3u877urdn24d"]
+
+[ext_resource type="PackedScene" uid="uid://04c0dgp20hsl" path="res://models/furniture/wallWindowSlide.glb" id="1_old8u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ut38j"]
+size = Vector3(1.0038757, 1.291336, 0.07550049)
+
+[node name="wall_wood_window" type="StaticBody3D" unique_id=1776025488]
+
+[node name="wallWindowSlide" parent="." unique_id=357921091 instance=ExtResource("1_old8u")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=836964742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4998932, 0.6451187, -0.025177002)
+shape = SubResource("BoxShape3D_ut38j")

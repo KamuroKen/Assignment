@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b50r16gxndfq2"]
+
+[ext_resource type="PackedScene" uid="uid://b3ha1if66f8gf" path="res://models/furniture/wall.glb" id="1_64x65"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ty1s8"]
+size = Vector3(1, 1.2900391, 0.052642822)
+
+[node name="wall_wood" type="StaticBody3D" unique_id=882589194]
+
+[node name="wall" parent="." unique_id=1186770901 instance=ExtResource("1_64x65")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=576963972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50311947, 0.6430664, -0.026351929)
+shape = SubResource("BoxShape3D_ty1s8")

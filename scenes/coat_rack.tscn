@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cj0xgn8n3cshl"]
+
+[ext_resource type="PackedScene" uid="uid://df282hovg4sgg" path="res://models/furniture/coatRack.glb" id="1_x7te3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_itcit"]
+size = Vector3(0.44781494, 0.28503418, 0.13842773)
+
+[node name="coatRack" type="StaticBody3D" unique_id=1246433713]
+
+[node name="coatRack" parent="." unique_id=191768694 instance=ExtResource("1_x7te3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=767764320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22543335, 0.13861084, -0.06677246)
+shape = SubResource("BoxShape3D_itcit")
