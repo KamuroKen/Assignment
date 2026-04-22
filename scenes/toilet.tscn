@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7g8tdfwnenbs"]
 
-[ext_resource type="PackedScene" uid="uid://b4n6tpebv1of3" path="res://models/furniture/toiletSquare.glb" id="1_ujtcc"]
+[ext_resource type="PackedScene" uid="uid://b4n6tpebv1of3" path="res://home/models/furniture/toiletSquare.glb" id="1_ujtcc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yyxms"]
 size = Vector3(0.3118286, 0.49084473, 0.390625)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://kdniwroj7ny0"]
 
-[ext_resource type="PackedScene" uid="uid://cxufjxnour5e8" path="res://models/furniture/lampSquareCeiling.glb" id="1_ohalu"]
+[ext_resource type="PackedScene" uid="uid://cxufjxnour5e8" path="res://home/models/furniture/lampSquareCeiling.glb" id="1_ohalu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bcbu5"]
 size = Vector3(0.12988281, 0.23095703, 0.14898682)
@@ -16,7 +16,7 @@ shape = SubResource("BoxShape3D_bcbu5")
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=52242972]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.06147529, -0.0149140805, -0.06459737)
 light_color = Color(0.9757194, 0.7597775, 0.64051795, 1)
-light_energy = 2.0
+light_energy = 3.0
 shadow_enabled = true
 spot_range = 10.0
-spot_angle = 75.0
+spot_angle = 80.0

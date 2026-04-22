@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://nkfn1460rw0q"]
 
-[ext_resource type="PackedScene" uid="uid://d3k6wg624ulhx" path="res://models/building1/GLB format/wall-doorway-square.glb" id="1_84yns"]
-[ext_resource type="PackedScene" uid="uid://c0a3aay2pv5iu" path="res://models/building1/GLB format/door-rotate-square-d.glb" id="2_2aimg"]
+[ext_resource type="PackedScene" uid="uid://d3k6wg624ulhx" path="res://home/models/building1/GLB format/wall-doorway-square.glb" id="1_84yns"]
+[ext_resource type="PackedScene" uid="uid://c0a3aay2pv5iu" path="res://home/models/building1/GLB format/door-rotate-square-d.glb" id="2_2aimg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ny72"]
 size = Vector3(0.14691162, 2.3891068, 1.9916992)

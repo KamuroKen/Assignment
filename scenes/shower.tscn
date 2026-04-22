@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://du8y7oqqhx80y"]
 
-[ext_resource type="PackedScene" uid="uid://dwcl1g2ev84il" path="res://models/furniture/showerRound.glb" id="1_k6fbq"]
+[ext_resource type="PackedScene" uid="uid://dwcl1g2ev84il" path="res://home/models/furniture/showerRound.glb" id="1_k6fbq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k6fbq"]
 radius = 0.2763672

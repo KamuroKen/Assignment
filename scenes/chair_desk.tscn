@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0k8mp4k4uq7r"]
 
-[ext_resource type="PackedScene" uid="uid://bcid7u67anh4g" path="res://models/furniture/chairDesk.glb" id="1_v2fp5"]
+[ext_resource type="PackedScene" uid="uid://bcid7u67anh4g" path="res://home/models/furniture/chairDesk.glb" id="1_v2fp5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yqd4k"]
 size = Vector3(0.3336792, 0.6105957, 0.288208)

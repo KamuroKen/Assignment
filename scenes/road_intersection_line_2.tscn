@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bblocts6cyib1"]
 
-[ext_resource type="PackedScene" uid="uid://bb4xfxxx6x72h" path="res://models/roads/road-intersection-line.glb" id="1_kyg5r"]
+[ext_resource type="PackedScene" uid="uid://bb4xfxxx6x72h" path="res://home/models/roads/road-intersection-line.glb" id="1_kyg5r"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4bgph"]
 size = Vector3(1, 0.008728027, 1)

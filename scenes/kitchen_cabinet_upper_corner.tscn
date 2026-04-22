@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4j6d28wcyd54"]
 
-[ext_resource type="PackedScene" uid="uid://b0wby7332c5pm" path="res://models/furniture/kitchenCabinetUpperCorner.glb" id="1_1bfq1"]
+[ext_resource type="PackedScene" uid="uid://b0wby7332c5pm" path="res://home/models/furniture/kitchenCabinetUpperCorner.glb" id="1_1bfq1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q4fyl"]
 size = Vector3(0.21643066, 0.39257813, 0.21289063)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b7bec5lfly5si"]
 
-[ext_resource type="PackedScene" uid="uid://ciuktgq364r0" path="res://models/furniture/ceilingFan.glb" id="1_p64dw"]
+[ext_resource type="PackedScene" uid="uid://ciuktgq364r0" path="res://home/models/furniture/ceilingFan.glb" id="1_p64dw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ib1wi"]
 size = Vector3(0.45648193, 0.13232422, 0.52783203)

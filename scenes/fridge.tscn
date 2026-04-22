@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0elmt47lbovr"]
 
-[ext_resource type="PackedScene" uid="uid://tbijfowuroxv" path="res://models/furniture/kitchenFridge.glb" id="1_ipvyg"]
+[ext_resource type="PackedScene" uid="uid://tbijfowuroxv" path="res://home/models/furniture/kitchenFridge.glb" id="1_ipvyg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sp1gv"]
 size = Vector3(0.4286499, 0.9272461, 0.28588867)

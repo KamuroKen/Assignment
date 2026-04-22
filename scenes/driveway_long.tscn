@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dssm4bnbgqgr4"]
 
-[ext_resource type="PackedScene" uid="uid://d2mgr1uw6wnba" path="res://models/building_suburban/driveway-long.glb" id="1_a7sni"]
+[ext_resource type="PackedScene" uid="uid://d2mgr1uw6wnba" path="res://home/models/building_suburban/driveway-long.glb" id="1_a7sni"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir57w"]
 size = Vector3(0.7227694, 0.01512146, 0.7995148)

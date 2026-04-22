@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cc5wnjpsegdb2"]
 
-[ext_resource type="PackedScene" uid="uid://cs8v7d4u4y4u5" path="res://models/furniture/washerDryerStacked.glb" id="1_814ap"]
+[ext_resource type="PackedScene" uid="uid://cs8v7d4u4y4u5" path="res://home/models/furniture/washerDryerStacked.glb" id="1_814ap"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vq4c7"]
 size = Vector3(0.39556885, 0.9456787, 0.37054443)

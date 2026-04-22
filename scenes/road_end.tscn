@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bl7j1qtg6fgbw"]
 
-[ext_resource type="PackedScene" uid="uid://c6bldi1vpnqnk" path="res://models/roads/road-end.glb" id="1_aa2i3"]
+[ext_resource type="PackedScene" uid="uid://c6bldi1vpnqnk" path="res://home/models/roads/road-end.glb" id="1_aa2i3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pril6"]
 size = Vector3(1, 0.062934875, 1)

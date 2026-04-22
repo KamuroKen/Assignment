@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4hg58v52g5k1"]
 
-[ext_resource type="PackedScene" uid="uid://1f4tdvpt5wq" path="res://models/furniture/cabinetBedDrawer.glb" id="1_lgd70"]
+[ext_resource type="PackedScene" uid="uid://1f4tdvpt5wq" path="res://home/models/furniture/cabinetBedDrawer.glb" id="1_lgd70"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_elvnp"]
 size = Vector3(0.26538086, 0.26953125, 0.21429443)

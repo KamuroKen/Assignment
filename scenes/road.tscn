@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bv0wailfi7gft"]
 
-[ext_resource type="PackedScene" uid="uid://doxa4kuxv8odt" path="res://models/roads/road-straight.glb" id="1_mv8x7"]
+[ext_resource type="PackedScene" uid="uid://doxa4kuxv8odt" path="res://home/models/roads/road-straight.glb" id="1_mv8x7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_my2y2"]
 size = Vector3(1, 0.065979004, 1)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://drqoh83o602ct"]
 
-[ext_resource type="PackedScene" uid="uid://ducob4w65uy6c" path="res://models/nature1/block-grass-low-large.glb" id="1_qtdqk"]
+[ext_resource type="PackedScene" uid="uid://ducob4w65uy6c" path="res://home/models/nature1/block-grass-low-large.glb" id="1_qtdqk"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_buty3"]
 size = Vector3(0.7943692, 0.09429932, 0.8843441)

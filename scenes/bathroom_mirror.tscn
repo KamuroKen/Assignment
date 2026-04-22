@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnka6shhxure4"]
 
-[ext_resource type="PackedScene" uid="uid://b5yjj8owe8db7" path="res://models/furniture/bathroomMirror.glb" id="1_wn3ih"]
+[ext_resource type="PackedScene" uid="uid://b5yjj8owe8db7" path="res://home/models/furniture/bathroomMirror.glb" id="1_wn3ih"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wsy41"]
 size = Vector3(0.3008423, 0.43753052, 0.14355469)

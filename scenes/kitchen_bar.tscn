@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6mrahjtadgf8"]
 
-[ext_resource type="PackedScene" uid="uid://dr7br71qjgk6k" path="res://models/furniture/kitchenBar.glb" id="1_0cu05"]
-[ext_resource type="PackedScene" uid="uid://dmm27ik2ckkk3" path="res://models/furniture/kitchenBarEnd.glb" id="2_1oepo"]
+[ext_resource type="PackedScene" uid="uid://dr7br71qjgk6k" path="res://home/models/furniture/kitchenBar.glb" id="1_0cu05"]
+[ext_resource type="PackedScene" uid="uid://dmm27ik2ckkk3" path="res://home/models/furniture/kitchenBarEnd.glb" id="2_1oepo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_buluw"]
 radius = 0.103027344

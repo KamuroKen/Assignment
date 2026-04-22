@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://doskrv7yrpaf5"]
 
-[ext_resource type="PackedScene" uid="uid://duynalvwlrudm" path="res://models/building1/GLB format/wall-window-square-detailed.glb" id="1_hmwxd"]
+[ext_resource type="PackedScene" uid="uid://duynalvwlrudm" path="res://home/models/building1/GLB format/wall-window-square-detailed.glb" id="1_hmwxd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_giiuq"]
 size = Vector3(0.14657593, 2.407257, 1.9969635)

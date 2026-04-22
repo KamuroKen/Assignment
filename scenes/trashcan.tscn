@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://8a5pwfhre8ti"]
 
-[ext_resource type="PackedScene" uid="uid://crqol7tke42kw" path="res://models/furniture/trashcan.glb" id="1_dqkxp"]
+[ext_resource type="PackedScene" uid="uid://crqol7tke42kw" path="res://home/models/furniture/trashcan.glb" id="1_dqkxp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1btkc"]
 radius = 0.10449219

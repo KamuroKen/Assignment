@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cx1cu3qwuroyc"]
 
-[ext_resource type="PackedScene" uid="uid://bdbath4iu2nca" path="res://models/furniture/computerScreen.glb" id="1_xjy7p"]
-[ext_resource type="PackedScene" uid="uid://b2ivm4wjdpspx" path="res://models/furniture/computerMouse.glb" id="2_263w6"]
-[ext_resource type="PackedScene" uid="uid://bg0mi76lcmpd1" path="res://models/furniture/computerKeyboard.glb" id="3_uxyje"]
+[ext_resource type="PackedScene" uid="uid://bdbath4iu2nca" path="res://home/models/furniture/computerScreen.glb" id="1_xjy7p"]
+[ext_resource type="PackedScene" uid="uid://b2ivm4wjdpspx" path="res://home/models/furniture/computerMouse.glb" id="2_263w6"]
+[ext_resource type="PackedScene" uid="uid://bg0mi76lcmpd1" path="res://home/models/furniture/computerKeyboard.glb" id="3_uxyje"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bo0rv"]
 size = Vector3(0.46728516, 0.29022217, 0.10015869)

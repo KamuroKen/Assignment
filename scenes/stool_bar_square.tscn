@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dukk2jgtsnorx"]
 
-[ext_resource type="PackedScene" uid="uid://dnsov04170d8g" path="res://models/furniture/stoolBarSquare.glb" id="1_te3fl"]
+[ext_resource type="PackedScene" uid="uid://dnsov04170d8g" path="res://home/models/furniture/stoolBarSquare.glb" id="1_te3fl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8w7kl"]
 size = Vector3(0.15435791, 0.402771, 0.14880371)

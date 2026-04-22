@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tyt1kr3phv7"]
 
-[ext_resource type="PackedScene" uid="uid://baki7fhajbx52" path="res://models/furniture/hoodModern.glb" id="1_ogwch"]
+[ext_resource type="PackedScene" uid="uid://baki7fhajbx52" path="res://home/models/furniture/hoodModern.glb" id="1_ogwch"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2iqe6"]
 size = Vector3(0.44439697, 0.40039063, 0.2883606)
