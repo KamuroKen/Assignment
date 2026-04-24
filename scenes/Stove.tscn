@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dtilmgr2wqpmq"]
 
-[ext_resource type="PackedScene" uid="uid://whtgn8f6rii2" path="res://home/models/furniture/kitchenStoveElectric.glb" id="1_mw7kv"]
+[ext_resource type="PackedScene" uid="uid://whtgn8f6rii2" path="res://home/models/furniture/Stove.glb" id="1_mw7kv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wkhv4"]
 size = Vector3(0.4248047, 0.456604, 0.45361328)
 
-[node name="kitchenStoveElectric" type="StaticBody3D" unique_id=2027743019]
+[node name="Stove" type="StaticBody3D" unique_id=2027743019]
 
 [node name="kitchenStoveElectric" parent="." unique_id=26132060 instance=ExtResource("1_mw7kv")]
 

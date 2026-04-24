@@ -3,9 +3,47 @@
 [ext_resource type="Script" uid="uid://ck7ey5yhxfccm" path="res://player/player_3d.gd" id="1_a5lo2"]
 [ext_resource type="PackedScene" uid="uid://prh35jb6tjtd" path="res://player/sophia_skin/sophia_skin.tscn" id="1_nni6y"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5lo2"]
+albedo_color = Color(0.93226075, 0.7029681, 0.68653405, 1)
+
+[sub_resource type="Curve" id="Curve_1obgi"]
+_data = [Vector2(0, 0.742241), 0.0, 0.0, 0, 0, Vector2(0.139952, 0.986755), 0.129787, 0.129787, 0, 0, Vector2(0.631579, 1), 0.0, 0.0, 0, 0, Vector2(0.785885, 0.873668), -1.98736, -1.98736, 0, 0, Vector2(1, 0.0148119), -5.26067, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_8asvs"]
+width = 32
+curve = SubResource("Curve_1obgi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jeexd"]
+lifetime_randomness = 0.33
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.35
+gravity = Vector3(0, 0.5, 0)
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 0.199998
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_8asvs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpdwg"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.536729, 0.511356, 0.854902, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cdrrj"]
+material = SubResource("StandardMaterial3D_kpdwg")
+radius = 0.15
+height = 0.3
+radial_segments = 8
+rings = 8
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5lo2"]
 radius = 0.26464844
-height = 1.6833496
+height = 1.6676636
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a5lo2"]
 
@@ -15,18 +53,30 @@ script = ExtResource("1_a5lo2")
 [node name="SophiaSkin" parent="." unique_id=1996689260 instance=ExtResource("1_nni6y")]
 unique_name_in_owner = true
 
+[node name="DustParticles" type="GPUParticles3D" parent="SophiaSkin" unique_id=1274764685]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.136607, -0.190934)
+material_override = SubResource("StandardMaterial3D_a5lo2")
+cast_shadow = 0
+gi_mode = 0
+amount = 10
+lifetime = 0.5
+explosiveness = 0.05
+process_material = SubResource("ParticleProcessMaterial_jeexd")
+draw_pass_1 = SubResource("SphereMesh_cdrrj")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1356412757]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8328695, 0.022508621)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84071255, 0.03638339)
 shape = SubResource("CapsuleShape3D_a5lo2")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=719482514]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.8890252, -0.4578584, 0, 0.4578584, 0.8890252, 0, 1.0404491, 0)
+transform = Transform3D(1, 0, 0, 0, 0.88902515, -0.45785838, 0, 0.45785838, 0.88902515, 0, 1.04, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=283167741]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 shape = SubResource("SphereShape3D_a5lo2")
-spring_length = 6.0
+spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1953057061]
 unique_name_in_owner = true

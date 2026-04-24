@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b2f03vuco36l3"]
+
+[ext_resource type="PackedScene" uid="uid://bmydnq5yhtsp7" path="res://home/models/furniture/toaster.glb" id="1_8x1ii"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8x1ii"]
+
+[node name="toaster" type="StaticBody3D" unique_id=1977881612]
+
+[node name="toaster" parent="." unique_id=123417774 instance=ExtResource("1_8x1ii")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1902268684]
+shape = SubResource("BoxShape3D_8x1ii")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://yxti5vaiwvjk"]
+
+[ext_resource type="PackedScene" uid="uid://5n72nfqewt5o" path="res://home/models/food/GLB format/bowl-soup.glb" id="1_7lkqr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pqnct"]
+size = Vector3(0.4985962, 0.22436523, 0.5634155)
+
+[node name="bowl-soup2" type="StaticBody3D" unique_id=1696408264]
+
+[node name="bowl-soup2" parent="." unique_id=1674164329 instance=ExtResource("1_7lkqr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=627700051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003753662, 0.10681152, -0.0074157715)
+shape = SubResource("BoxShape3D_pqnct")

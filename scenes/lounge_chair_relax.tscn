@@ -3,12 +3,19 @@
 [ext_resource type="PackedScene" uid="uid://dxu4i3bh4xp22" path="res://home/models/furniture/loungeChairRelax.glb" id="1_cxgw3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1iwme"]
-size = Vector3(0.48883057, 0.6381836, 0.6263428)
+size = Vector3(0.48883057, 0.6248779, 0.14559937)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cxgw3"]
+size = Vector3(0.48883057, 0.22943115, 0.6133728)
 
 [node name="loungeChairRelax" type="StaticBody3D" unique_id=1874788600]
 
 [node name="loungeChairRelax" parent="." unique_id=939601525 instance=ExtResource("1_cxgw3")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1499760954]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24551392, 0.32250977, -0.31817627)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24551392, 0.31585693, -0.6004486)
 shape = SubResource("BoxShape3D_1iwme")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=137709390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24551392, 0.118133545, -0.30603594)
+shape = SubResource("BoxShape3D_cxgw3")
