@@ -4,6 +4,7 @@ extends Node3D
 const CHECKPOINT_GROUP := "level_2_checkpoint"
 const FINISH_GROUP := "level_2_finish"
 const TUTORIAL_TRIGGER_GROUP := "level_2_tutorial_trigger"
+const NEXT_SCENE_ERROR_TEXT := "Failed to load the next scene."
 
 
 @export_node_path("CharacterBody3D") var player_path: NodePath = ^"Player3D"
@@ -15,10 +16,8 @@ const TUTORIAL_TRIGGER_GROUP := "level_2_tutorial_trigger"
 @export var level_intro_skip_text := "Press Q to continue"
 
 @export_group("Finish")
-@export var require_interact_for_finish := true
 @export var finish_delay := 1.75
 @export var checkpoint_message_duration := 1.35
-@export var finish_prompt_text := "Press E to finish the level"
 @export var finish_message_text := "Level Complete"
 @export var checkpoint_message_text := "Checkpoint reached"
 
@@ -29,15 +28,12 @@ var _current_respawn_position := Vector3.ZERO
 var _current_respawn_rotation := Vector3.ZERO
 var _active_checkpoint: Node
 var _finish_target: Node
-var _is_player_near_finish := false
 var _is_finishing := false
 var _is_level_intro_active := false
 
 var _finish_timer: Timer
 var _message_timer: Timer
 var _tutorial_timer: Timer
-var _prompt_panel: PanelContainer
-var _prompt_label: Label
 var _message_panel: PanelContainer
 var _message_label: Label
 var _tutorial_panel: PanelContainer
@@ -48,12 +44,15 @@ var _level_intro_title_label: Label
 var _level_intro_body_label: Label
 var _level_intro_hint_label: Label
 var _shown_tutorial_hints: Dictionary = {}
-var _pending_tutorial_hint: Dictionary = {}
+var _pending_tutorial_hints: Array[Dictionary] = []
 
 
 func _ready() -> void:
 	_player = get_node_or_null(player_path) as CharacterBody3D
-	
+	if _player == null:
+		push_error("Level2Controller requires a valid CharacterBody3D at player_path.")
+		set_process_unhandled_input(false)
+		return
 
 	_spawn_position = _player.global_position
 	_spawn_rotation = _player.global_rotation
@@ -72,13 +71,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 
-	if _is_level_intro_active or _is_finishing or not require_interact_for_finish:
-		return
-
-	if _is_player_near_finish and event.is_action_pressed("interact"):
-		_complete_level()
-		get_viewport().set_input_as_handled()
-
 
 func respawn_body_from_kill_plane(body: Node3D) -> void:
 	if body != _player or _is_finishing:
@@ -96,14 +88,11 @@ func _connect_level_nodes() -> void:
 			node.connect("checkpoint_reached", checkpoint_callback)
 
 	var finish_enter_callback := Callable(self, "_on_finish_player_entered")
-	var finish_exit_callback := Callable(self, "_on_finish_player_exited")
 	for node in get_tree().get_nodes_in_group(FINISH_GROUP):
 		if not is_ancestor_of(node):
 			continue
 		if not node.is_connected("player_entered", finish_enter_callback):
 			node.connect("player_entered", finish_enter_callback)
-		if not node.is_connected("player_exited", finish_exit_callback):
-			node.connect("player_exited", finish_exit_callback)
 
 	var tutorial_callback := Callable(self, "_on_tutorial_requested")
 	for node in get_tree().get_nodes_in_group(TUTORIAL_TRIGGER_GROUP):
@@ -141,7 +130,7 @@ func _activate_checkpoint(checkpoint: Node) -> void:
 
 	_show_message(checkpoint_message_text, checkpoint_message_duration)
 	if checkpoint.has_method("get_tutorial_hint_data"):
-		_show_tutorial_hint_data(checkpoint.call("get_tutorial_hint_data"))
+		_enqueue_tutorial_hint(checkpoint.call("get_tutorial_hint_data"))
 
 
 func _complete_level() -> void:
@@ -151,12 +140,11 @@ func _complete_level() -> void:
 	var finish_target := _finish_target
 
 	_is_finishing = true
-	_is_player_near_finish = false
 	_finish_target = null
-	_prompt_panel.visible = false
 	_tutorial_panel.visible = false
 	_tutorial_timer.stop()
 	_message_timer.stop()
+	_pending_tutorial_hints.clear()
 	_message_label.text = finish_message_text
 	_message_panel.visible = true
 
@@ -170,9 +158,7 @@ func _complete_level() -> void:
 
 
 func _respawn_player(respawn_position: Vector3, rotation_value: Vector3) -> void:
-	_is_player_near_finish = false
 	_finish_target = null
-	_prompt_panel.visible = false
 	_tutorial_panel.visible = false
 
 	if _player.has_method("set_controls_locked"):
@@ -207,23 +193,7 @@ func _on_finish_player_entered(finish: Node3D, body: Node3D) -> void:
 		return
 
 	_finish_target = finish
-	_is_player_near_finish = true
-
-	if require_interact_for_finish:
-		_prompt_label.text = finish_prompt_text
-		_prompt_panel.visible = true
-	else:
-		_complete_level()
-
-
-func _on_finish_player_exited(finish: Node3D, body: Node3D) -> void:
-	if body != _player:
-		return
-
-	if finish == _finish_target:
-		_finish_target = null
-	_is_player_near_finish = false
-	_prompt_panel.visible = false
+	_complete_level()
 
 
 func _on_finish_timer_timeout() -> void:
@@ -231,7 +201,13 @@ func _on_finish_timer_timeout() -> void:
 	_is_finishing = false
 
 	if next_scene_path != "":
-		get_tree().change_scene_to_file(next_scene_path)
+		var change_error := get_tree().change_scene_to_file(next_scene_path)
+		if change_error == OK:
+			return
+
+		_set_player_controls_locked(false)
+		_show_message(NEXT_SCENE_ERROR_TEXT, 2.5)
+		push_error("Failed to load next scene: %s" % next_scene_path)
 		return
 
 	_reset_checkpoint_progress()
@@ -254,25 +230,49 @@ func _on_tutorial_requested(trigger: Node3D, body: Node3D) -> void:
 
 	var hint_data: Dictionary = trigger.call("get_tutorial_hint_data")
 	if _is_level_intro_active:
-		_pending_tutorial_hint = hint_data
+		_enqueue_tutorial_hint(hint_data)
 		return
 
-	_show_tutorial_hint_data(hint_data)
+	_enqueue_tutorial_hint(hint_data)
 
 
-func _show_tutorial_hint_data(hint_data: Dictionary) -> void:
+func _enqueue_tutorial_hint(hint_data: Dictionary) -> void:
 	if hint_data.is_empty():
 		return
+
+	_pending_tutorial_hints.append(hint_data)
+	if _is_level_intro_active or _tutorial_panel.visible or _is_finishing:
+		return
+
+	_show_next_tutorial_hint()
+
+
+func _show_next_tutorial_hint() -> void:
+	if _is_level_intro_active or _is_finishing:
+		return
+
+	while not _pending_tutorial_hints.is_empty():
+		var raw_next_hint: Variant = _pending_tutorial_hints.pop_front()
+		var next_hint: Dictionary = raw_next_hint if raw_next_hint is Dictionary else {}
+		if _show_tutorial_hint_data(next_hint):
+			return
+
+	_tutorial_panel.visible = false
+
+
+func _show_tutorial_hint_data(hint_data: Dictionary) -> bool:
+	if hint_data.is_empty():
+		return false
 
 	var title := String(hint_data.get("title", "")).strip_edges()
 	var body := String(hint_data.get("body", "")).strip_edges()
 	if title == "" and body == "":
-		return
+		return false
 
 	var hint_id := _resolve_tutorial_hint_id(hint_data, title, body)
 	var show_once := bool(hint_data.get("show_once", true))
 	if show_once and _shown_tutorial_hints.has(hint_id):
-		return
+		return false
 
 	if show_once:
 		_shown_tutorial_hints[hint_id] = true
@@ -283,6 +283,7 @@ func _show_tutorial_hint_data(hint_data: Dictionary) -> void:
 	_tutorial_body_label.text = body
 	_tutorial_panel.visible = true
 	_tutorial_timer.start(duration)
+	return true
 
 
 func _show_level_intro_dialogue() -> void:
@@ -308,10 +309,7 @@ func _hide_level_intro_dialogue() -> void:
 	_level_intro_overlay.visible = false
 	_set_player_controls_locked(false)
 
-	if not _pending_tutorial_hint.is_empty():
-		var pending_hint := _pending_tutorial_hint
-		_pending_tutorial_hint = {}
-		_show_tutorial_hint_data(pending_hint)
+	_show_next_tutorial_hint()
 
 
 func _set_player_controls_locked(is_locked: bool) -> void:
@@ -329,36 +327,13 @@ func _resolve_tutorial_hint_id(hint_data: Dictionary, title: String, body: Strin
 
 func _on_tutorial_timer_timeout() -> void:
 	_tutorial_panel.visible = false
+	_show_next_tutorial_hint()
 
 
 func _build_ui() -> void:
 	var canvas_layer := CanvasLayer.new()
 	canvas_layer.layer = 15
 	add_child(canvas_layer)
-
-	_prompt_panel = PanelContainer.new()
-	_prompt_panel.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	_prompt_panel.offset_left = 300.0
-	_prompt_panel.offset_right = -300.0
-	_prompt_panel.offset_top = -90.0
-	_prompt_panel.offset_bottom = -28.0
-	_prompt_panel.add_theme_stylebox_override("panel", _create_panel_style(Color(0.08, 0.1, 0.13, 0.9)))
-	_prompt_panel.visible = false
-	canvas_layer.add_child(_prompt_panel)
-
-	var prompt_margin := MarginContainer.new()
-	prompt_margin.add_theme_constant_override("margin_left", 16)
-	prompt_margin.add_theme_constant_override("margin_top", 12)
-	prompt_margin.add_theme_constant_override("margin_right", 16)
-	prompt_margin.add_theme_constant_override("margin_bottom", 12)
-	_prompt_panel.add_child(prompt_margin)
-
-	_prompt_label = Label.new()
-	_prompt_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_prompt_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_prompt_label.add_theme_font_size_override("font_size", 20)
-	_prompt_label.add_theme_color_override("font_color", Color(0.97, 0.97, 0.97))
-	prompt_margin.add_child(_prompt_label)
 
 	_message_panel = PanelContainer.new()
 	_message_panel.set_anchors_preset(Control.PRESET_TOP_WIDE)

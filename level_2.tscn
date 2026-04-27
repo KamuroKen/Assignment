@@ -60,7 +60,6 @@ size = Vector3(2017.7839, 1.3837891, 1445.5068)
 [node name="Level2" type="Node3D" unique_id=1336825804]
 script = ExtResource("1_i558w")
 next_scene_path = "res://menu/main_menu.tscn"
-require_interact_for_finish = false
 finish_delay = 3.5
 finish_message_text = "You completed the game.
 Thanks for playing!"
@@ -119,6 +118,8 @@ allows_ledge_grab = true
 
 [node name="TutorialLedgeGrab" parent="Course" unique_id=859967115 instance=ExtResource("10_2pufk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.981243, 15.397996, -8.086868)
+tutorial_body = "Jump(Space) toward the edge to grab it.
+Press Space again to climb up."
 
 [node name="StaticPlatform5" parent="Course" unique_id=686717927 instance=ExtResource("6_cuxq2")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1, -81.234, 21, -8.215)
@@ -176,7 +177,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.371, 24, -8.24)
 tutorial_duration = 4.5
 
 [node name="TutorialWallSlide" parent="Course" unique_id=1458171899 instance=ExtResource("12_ikghu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -143.66774, 24.5, -8.615689)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133.65385, 24.5, -8.615689)
 
 [node name="ParkourWall" parent="Course" unique_id=1950973028 instance=ExtResource("13_i6smf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -145.118, 27, -0.5)
