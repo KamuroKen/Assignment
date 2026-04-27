@@ -1,0 +1,52 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_spike_platform.gd" id="1_script"]
+
+[sub_resource type="BoxShape3D" id="1_platform_shape"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxMesh" id="2_platform_mesh"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="3_hazard_shape"]
+size = Vector3(3.6, 1.2, 3.6)
+
+[sub_resource type="StandardMaterial3D" id="4_platform_mat"]
+albedo_color = Color(0.3, 0.16, 0.16, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="5_spike_mesh"]
+top_radius = 0.0
+bottom_radius = 0.28
+height = 0.8
+radial_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="6_spike_mat"]
+albedo_color = Color(0.12, 0.12, 0.14, 1)
+roughness = 0.92
+
+[node name="SpikePlatform" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="PlatformBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlatformBody"]
+shape = SubResource("1_platform_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlatformBody"]
+mesh = SubResource("2_platform_mesh")
+material_override = SubResource("4_platform_mat")
+
+[node name="HazardArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HazardArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("3_hazard_shape")
+
+[node name="SpikeRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Spike_0" type="MeshInstance3D" parent="SpikeRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("5_spike_mesh")
+material_override = SubResource("6_spike_mat")

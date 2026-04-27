@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_rotating_platform.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="1_mat"]
+albedo_color = Color(0.49, 0.39, 0.62, 1)
+roughness = 0.88
+
+[sub_resource type="BoxShape3D" id="2_shape"]
+size = Vector3(6.4, 0.8, 1.8)
+
+[sub_resource type="BoxMesh" id="3_mesh"]
+size = Vector3(6.4, 0.8, 1.8)
+
+[node name="RotatingPlatform" type="AnimatableBody3D"]
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("2_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("3_mesh")
+material_override = SubResource("1_mat")

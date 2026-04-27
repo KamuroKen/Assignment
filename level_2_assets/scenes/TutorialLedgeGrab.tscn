@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialTrigger.tscn" id="1_base"]
+
+[node name="TutorialLedgeGrab" instance=ExtResource("1_base")]
+hint_id = "ledge_grab_intro"
+tutorial_title = "Ledge Grab"
+tutorial_body = "Jump toward the edge to grab it.\nPress Space again to climb up."
+tutorial_duration = 5.0
+show_once = true

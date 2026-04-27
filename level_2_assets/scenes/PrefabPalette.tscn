@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/StaticPlatform.tscn" id="1_static"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/MovingPlatform.tscn" id="2_moving"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/RotatingPlatform.tscn" id="3_rotating"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/RampPlatform.tscn" id="4_ramp"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/CheckpointPlatform.tscn" id="5_checkpoint"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/FinishPlatform.tscn" id="6_finish"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/ParkourWall.tscn" id="7_wall"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialLedgeGrab.tscn" id="8_ledge_tutorial"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialWallSlide.tscn" id="9_wall_tutorial"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialTeleport.tscn" id="10_teleport_tutorial"]
+
+[node name="PrefabPalette" type="Node3D"]
+
+[node name="StaticPlatform" parent="." instance=ExtResource("1_static")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("2_moving")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="RotatingPlatform" parent="." instance=ExtResource("3_rotating")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="RampPlatform" parent="." instance=ExtResource("4_ramp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="CheckpointPlatform" parent="." instance=ExtResource("5_checkpoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 0)
+
+[node name="FinishPlatform" parent="." instance=ExtResource("6_finish")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0)
+
+[node name="ParkourWall" parent="." instance=ExtResource("7_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 3, 0)
+
+[node name="TutorialLedgeGrab" parent="." instance=ExtResource("8_ledge_tutorial")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 1.5, 0)
+
+[node name="TutorialWallSlide" parent="." instance=ExtResource("9_wall_tutorial")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98, 1.5, 0)
+
+[node name="TutorialTeleport" parent="." instance=ExtResource("10_teleport_tutorial")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 1.5, 0)

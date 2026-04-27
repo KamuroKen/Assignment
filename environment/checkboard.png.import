@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcbwjxb2g4yn0"
-path.s3tc="res://.godot/imported/moon.png-49ba8c00494e5b6378347e406dc1c5eb.s3tc.ctex"
+uid="uid://bdiakfkggm4yb"
+path.s3tc="res://.godot/imported/checkboard.png-dfcbfcc62df64ee3f7674f7a7a556f76.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://moon.png"
-dest_files=["res://.godot/imported/moon.png-49ba8c00494e5b6378347e406dc1c5eb.s3tc.ctex"]
+source_file="res://environment/checkboard.png"
+dest_files=["res://.godot/imported/checkboard.png-dfcbfcc62df64ee3f7674f7a7a556f76.s3tc.ctex"]
 
 [params]
 

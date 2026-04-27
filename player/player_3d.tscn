@@ -42,7 +42,7 @@ radial_segments = 8
 rings = 8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5lo2"]
-radius = 0.26464844
+radius = 0.22705078
 height = 1.6676636
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a5lo2"]

@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_teleporter.gd" id="1_script"]
+
+[sub_resource type="TorusMesh" id="1_portal_mesh"]
+inner_radius = 0.35
+outer_radius = 0.65
+ring_sides = 10
+rings = 18
+
+[sub_resource type="CylinderShape3D" id="2_portal_shape"]
+height = 2.2
+radius = 1.0
+
+[node name="TeleportEntrance" type="Area3D"]
+script = ExtResource("1_script")
+
+[node name="PortalMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0)
+mesh = SubResource("1_portal_mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("2_portal_shape")

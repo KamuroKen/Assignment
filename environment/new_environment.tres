@@ -1,8 +1,8 @@
 [gd_resource type="Environment" format=3 uid="uid://3jru3cq5oa23"]
 
-[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_23g3m"]
-[ext_resource type="Texture2D" uid="uid://ca3jtautvrj1u" path="res://level/moon.png" id="2_pnhtl"]
-[ext_resource type="Texture2D" uid="uid://bhbqoc3r4rb4m" path="res://new_noise_texture_2d.tres" id="3_yde2g"]
+[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://environment/sky_with_stars.tres" id="1_23g3m"]
+[ext_resource type="Texture2D" path="res://level/moon.png" id="2_pnhtl"]
+[ext_resource type="Texture2D" path="res://new_noise_texture_2d.tres" id="3_yde2g"]
 
 [sub_resource type="Curve" id="Curve_k4wis"]
 _data = [Vector2(0.331719, 0.0391753), 0.0, 0.0, 0, 0, Vector2(0.697336, 1), 0.51276, 0.0, 0, 0]

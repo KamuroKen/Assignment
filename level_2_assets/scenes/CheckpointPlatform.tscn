@@ -1,0 +1,67 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_checkpoint.gd" id="1_script"]
+
+[sub_resource type="BoxShape3D" id="1_platform_shape"]
+size = Vector3(7, 1, 7)
+
+[sub_resource type="BoxMesh" id="2_platform_mesh"]
+size = Vector3(7, 1, 7)
+
+[sub_resource type="BoxShape3D" id="3_trigger_shape"]
+size = Vector3(5.8, 2.3, 5.8)
+
+[sub_resource type="BoxMesh" id="4_pole_mesh"]
+size = Vector3(0.16, 3.2, 0.16)
+
+[sub_resource type="BoxMesh" id="5_beacon_mesh"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="6_platform_mat"]
+albedo_color = Color(0.76, 0.64, 0.24, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="7_pole_mat"]
+albedo_color = Color(0.78, 0.78, 0.8, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="8_beacon_mat"]
+albedo_color = Color(0.96, 0.84, 0.36, 1)
+emission_enabled = true
+emission = Color(0.96, 0.84, 0.36, 1)
+emission_energy_multiplier = 0.12
+roughness = 0.82
+
+[node name="CheckpointPlatform" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="PlatformBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlatformBody"]
+shape = SubResource("1_platform_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlatformBody"]
+mesh = SubResource("2_platform_mesh")
+material_override = SubResource("6_platform_mat")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("3_trigger_shape")
+
+[node name="RespawnMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, -2.2)
+
+[node name="CheckpointMarker" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="PoleMesh" type="MeshInstance3D" parent="CheckpointMarker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+mesh = SubResource("4_pole_mesh")
+material_override = SubResource("7_pole_mat")
+
+[node name="BeaconMesh" type="MeshInstance3D" parent="CheckpointMarker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65, 0)
+mesh = SubResource("5_beacon_mesh")
+material_override = SubResource("8_beacon_mat")

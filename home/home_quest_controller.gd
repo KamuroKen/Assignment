@@ -1,6 +1,9 @@
 extends Node3D
 
 const INTRO_TEXT := "I need to get ready for university.\nFirst things first: take a shower, make the bed, get dressed, grab breakfast from the fridge, drink coffee, and take my laptop.\nThen I can leave the house."
+const LEVEL_COMPLETE_TEXT := "Level Complete"
+const NEXT_LEVEL_PATH := "res://level_2.tscn"
+const LEVEL_TRANSITION_DELAY := 2.0
 
 const QUESTS := [
 	{
@@ -69,6 +72,7 @@ var _completed_objectives: Dictionary = {}
 var _current_quest_index := 0
 var _current_interactable_id := ""
 var _dialogue_active := false
+var _is_transitioning := false
 
 var _player: CharacterBody3D
 var _quest_panel: PanelContainer
@@ -80,6 +84,7 @@ var _dialogue_overlay: ColorRect
 var _status_panel: PanelContainer
 var _status_label: Label
 var _status_timer: Timer
+var _level_transition_timer: Timer
 
 
 func _ready():
@@ -93,7 +98,7 @@ func _ready():
 
 
 func _process(_delta: float):
-	if _dialogue_active or _current_quest_index >= QUESTS.size():
+	if _dialogue_active or _is_transitioning or _current_quest_index >= QUESTS.size():
 		_prompt_panel.visible = false
 		return
 
@@ -114,7 +119,7 @@ func _unhandled_input(event: InputEvent):
 		get_viewport().set_input_as_handled()
 		return
 
-	if _dialogue_active:
+	if _dialogue_active or _is_transitioning:
 		return
 
 	if event.is_action_pressed("interact") and _current_interactable_id != "":
@@ -129,18 +134,23 @@ func _complete_objective(objective_id: String):
 	_completed_objectives[objective_id] = true
 	_current_interactable_id = ""
 	var status_text := "Objective complete: %s" % _objective_label(objective_id)
+	var should_transition := false
 
 	if _is_current_quest_complete():
+		should_transition = _current_quest_index == QUESTS.size() - 1
 		status_text = _advance_quest()
 
 	_update_quest_ui()
 	_show_status(status_text)
 
+	if should_transition:
+		_begin_level_transition()
+
 
 func _advance_quest() -> String:
 	_current_quest_index += 1
 	if _current_quest_index >= QUESTS.size():
-		return "Quest complete."
+		return LEVEL_COMPLETE_TEXT
 
 	return "New quest: %s" % String(QUESTS[_current_quest_index]["title"])
 
@@ -228,8 +238,8 @@ func _set_player_controls_locked(is_locked: bool):
 
 func _update_quest_ui():
 	if _current_quest_index >= QUESTS.size():
-		_quest_title_label.text = "Morning Complete"
-		_quest_objectives_label.text = "[x] Leave the house"
+		_quest_title_label.text = "Home Level Complete"
+		_quest_objectives_label.text = "[x] Leave the house\nLoading Level 2..."
 		return
 
 	var current_quest: Dictionary = QUESTS[_current_quest_index]
@@ -252,6 +262,29 @@ func _show_status(text: String):
 
 func _on_status_timer_timeout():
 	_status_panel.visible = false
+
+
+func _begin_level_transition():
+	if _is_transitioning:
+		return
+
+	_is_transitioning = true
+	_prompt_panel.visible = false
+	_quest_panel.visible = false
+	_set_player_controls_locked(true)
+	_status_timer.stop()
+	_status_label.text = LEVEL_COMPLETE_TEXT
+	_status_panel.visible = true
+	_level_transition_timer.start(LEVEL_TRANSITION_DELAY)
+
+
+func _on_level_transition_timeout():
+	var change_error := get_tree().change_scene_to_file(NEXT_LEVEL_PATH)
+	if change_error != OK:
+		_is_transitioning = false
+		_quest_panel.visible = true
+		_set_player_controls_locked(false)
+		push_error("Failed to load next level: %s" % NEXT_LEVEL_PATH)
 
 
 func _ensure_input_action(action_name: StringName, keycode: Key):
@@ -396,6 +429,11 @@ func _build_ui():
 	_status_timer.wait_time = 2.0
 	_status_timer.timeout.connect(_on_status_timer_timeout)
 	add_child(_status_timer)
+
+	_level_transition_timer = Timer.new()
+	_level_transition_timer.one_shot = true
+	_level_transition_timer.timeout.connect(_on_level_transition_timeout)
+	add_child(_level_transition_timer)
 
 
 func _panel_style(background: Color) -> StyleBoxFlat:

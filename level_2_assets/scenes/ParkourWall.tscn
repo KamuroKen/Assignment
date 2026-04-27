@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dm2v1jqrkp117"]
+
+[ext_resource type="Script" uid="uid://bjg5c64btjbfx" path="res://level_2_assets/scripts/level_2_parkour_wall.gd" id="1_script"]
+
+[sub_resource type="BoxShape3D" id="1_shape"]
+size = Vector3(1.6, 6, 8)
+
+[sub_resource type="StandardMaterial3D" id="3_mat"]
+albedo_color = Color(0.82, 0.38, 0.19, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="2_mesh"]
+size = Vector3(1.6, 6, 8)
+
+[node name="ParkourWall" type="StaticBody3D" unique_id=1950973028]
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=746126021]
+shape = SubResource("1_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1486346823]
+material_override = SubResource("3_mat")
+mesh = SubResource("2_mesh")

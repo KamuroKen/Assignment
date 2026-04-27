@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialTrigger.tscn" id="1_base"]
+
+[node name="TutorialWallSlide" instance=ExtResource("1_base")]
+hint_id = "wall_slide_intro"
+tutorial_title = "Wall Slide"
+tutorial_body = "Jump into the wall.\nHold W to slide and press Space to jump off."
+tutorial_duration = 5.0
+show_once = true
