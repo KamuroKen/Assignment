@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_teleporter.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://ds8ikae7dskqf" path="res://level_2_assets/scripts/level_2_teleporter.gd" id="1_script"]
 
 [sub_resource type="TorusMesh" id="1_portal_mesh"]
 inner_radius = 0.35

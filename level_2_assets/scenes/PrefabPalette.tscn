@@ -6,10 +6,11 @@
 [ext_resource type="PackedScene" path="res://level_2_assets/scenes/RampPlatform.tscn" id="4_ramp"]
 [ext_resource type="PackedScene" path="res://level_2_assets/scenes/CheckpointPlatform.tscn" id="5_checkpoint"]
 [ext_resource type="PackedScene" path="res://level_2_assets/scenes/FinishPlatform.tscn" id="6_finish"]
-[ext_resource type="PackedScene" path="res://level_2_assets/scenes/ParkourWall.tscn" id="7_wall"]
+[ext_resource type="PackedScene" uid="uid://dm2v1jqrkp117" path="res://level_2_assets/scenes/ParkourWall.tscn" id="7_wall"]
 [ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialLedgeGrab.tscn" id="8_ledge_tutorial"]
-[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialWallSlide.tscn" id="9_wall_tutorial"]
-[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialTeleport.tscn" id="10_teleport_tutorial"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialBasics.tscn" id="9_basics_tutorial"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialWallSlide.tscn" id="10_wall_tutorial"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialTeleport.tscn" id="11_teleport_tutorial"]
 
 [node name="PrefabPalette" type="Node3D"]
 
@@ -37,8 +38,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 3, 0)
 [node name="TutorialLedgeGrab" parent="." instance=ExtResource("8_ledge_tutorial")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 1.5, 0)
 
-[node name="TutorialWallSlide" parent="." instance=ExtResource("9_wall_tutorial")]
+[node name="TutorialBasics" parent="." instance=ExtResource("9_basics_tutorial")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98, 1.5, 0)
 
-[node name="TutorialTeleport" parent="." instance=ExtResource("10_teleport_tutorial")]
+[node name="TutorialWallSlide" parent="." instance=ExtResource("10_wall_tutorial")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 1.5, 0)
+
+[node name="TutorialTeleport" parent="." instance=ExtResource("11_teleport_tutorial")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126, 1.5, 0)

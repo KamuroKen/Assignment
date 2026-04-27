@@ -3,20 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://bsdxs0lv0bcbl" path="res://home/models/furniture/lampWall.glb" id="1_giuow"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_all1l"]
-size = Vector3(0.22454834, 0.10055542, 0.14801025)
+size = Vector3(0.22454834, 0.10055542, 0.08816528)
 
 [node name="lampWall" type="StaticBody3D" unique_id=277268311]
-
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1365115547]
-transform = Transform3D(-0.96493405, 0.1745255, -0.1960692, -5.8125533e-08, 0.74695164, 0.6648784, 0.26249242, 0.6415639, -0.7207591, 0, 0.04607156, 0.13551775)
-light_color = Color(0.9647755, 0.89622873, 0.5400381, 1)
-light_energy = 2.5
-shadow_enabled = true
-spot_range = 10.0
-spot_angle = 75.0
 
 [node name="lampWall" parent="." unique_id=2112726801 instance=ExtResource("1_giuow")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1394695638]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008239746, 0.048294067, 0.07333374)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008239746, 0.048294067, 0.043411255)
 shape = SubResource("BoxShape3D_all1l")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=20400677]
+transform = Transform3D(1, 0, 0, 0, -0.20698978, 0.9783431, 0, -0.9783431, -0.20698978, 0.0091362, 0.08430427, 0.15878826)
+light_color = Color(0.9647059, 0.8980392, 0.5411765, 1)
+shadow_enabled = true
+omni_range = 10.0

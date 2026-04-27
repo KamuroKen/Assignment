@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_moving_platform.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dxec3e77ew6c5" path="res://level_2_assets/scripts/level_2_moving_platform.gd" id="1_script"]
 
 [sub_resource type="StandardMaterial3D" id="1_mat"]
 albedo_color = Color(0.36, 0.51, 0.63, 1)

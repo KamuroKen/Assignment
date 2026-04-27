@@ -4,6 +4,12 @@ const INTRO_TEXT := "I need to get ready for university.\nFirst things first: ta
 const LEVEL_COMPLETE_TEXT := "Level Complete"
 const NEXT_LEVEL_PATH := "res://level_2.tscn"
 const LEVEL_TRANSITION_DELAY := 2.0
+const TUTORIAL_TRIGGER_GROUP := "level_2_tutorial_trigger"
+const OBJECTIVE_WAYPOINT_SCENE := preload("res://home/objective_waypoint.tscn")
+
+@export_group("Objective Waypoint")
+@export var show_objective_waypoint := true
+@export_range(0.0, 5.0, 0.05) var objective_waypoint_height := 2.1
 
 const QUESTS := [
 	{
@@ -35,21 +41,22 @@ const QUESTS := [
 				"label": "Eat breakfast",
 				"prompt": "Press E to eat breakfast",
 				"node_path": "furniture/fridge",
-				"radius": 2.0,
+				"radius": 1.0,
+				"waypoint_offset": Vector3(0.6, 0.0, 0.0),
 			},
 			{
 				"id": "drink_coffee",
 				"label": "Drink coffee",
 				"prompt": "Press E to drink coffee",
 				"node_path": "furniture/CoffeeMachine",
-				"radius": 2.0,
+				"radius": 1.5,
 			},
 			{
 				"id": "take_laptop",
 				"label": "Take the laptop",
 				"prompt": "Press E to take the laptop",
 				"node_path": "furniture/laptop",
-				"radius": 2.0,
+				"radius": 1.5,
 			},
 		],
 	},
@@ -61,7 +68,7 @@ const QUESTS := [
 				"label": "Leave the house",
 				"prompt": "Press E to leave the house",
 				"node_path": "walls/doorway_wood",
-				"radius": 2.0,
+				"radius": 1.5,
 			},
 		],
 	},
@@ -85,19 +92,36 @@ var _status_panel: PanelContainer
 var _status_label: Label
 var _status_timer: Timer
 var _level_transition_timer: Timer
+var _tutorial_panel: PanelContainer
+var _tutorial_title_label: Label
+var _tutorial_body_label: Label
+var _tutorial_timer: Timer
+var _shown_tutorial_hints: Dictionary = {}
+var _pending_tutorial_hints: Array[Dictionary] = []
+var _objective_waypoint: Node3D
 
 
 func _ready():
 	_player = get_node_or_null("Player3D")
+	if _player == null:
+		push_error("HomeQuestController requires a Player3D node in the Home scene.")
+		set_process(false)
+		set_process_unhandled_input(false)
+		return
+
 	_ensure_input_action("interact", KEY_E)
 	_ensure_input_action("dialog_skip", KEY_Q)
 	_cache_objective_nodes()
+	_build_objective_waypoint()
 	_build_ui()
+	_connect_tutorial_triggers()
 	_update_quest_ui()
 	_show_intro_dialogue()
 
 
 func _process(_delta: float):
+	_update_objective_waypoint()
+
 	if _dialogue_active or _is_transitioning or _current_quest_index >= QUESTS.size():
 		_prompt_panel.visible = false
 		return
@@ -203,6 +227,30 @@ func _find_nearest_objective() -> Dictionary:
 	return closest_objective
 
 
+func _find_waypoint_objective() -> Dictionary:
+	var closest_objective := {}
+	var closest_distance := INF
+	var player_position := _player.global_position
+
+	for objective in _current_objectives():
+		var objective_id := String(objective["id"])
+		if _completed_objectives.has(objective_id):
+			continue
+
+		var target_node: Node3D = _objective_nodes.get(objective_id)
+		if target_node == null:
+			continue
+
+		var offset := target_node.global_position - player_position
+		offset.y = 0.0
+		var distance := offset.length()
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_objective = objective
+
+	return closest_objective
+
+
 func _cache_objective_nodes():
 	for quest in QUESTS:
 		for objective in quest["objectives"]:
@@ -215,11 +263,59 @@ func _cache_objective_nodes():
 				push_warning("Quest target is missing or not Node3D: %s" % objective_id)
 
 
+func _build_objective_waypoint():
+	if not show_objective_waypoint:
+		return
+
+	_objective_waypoint = OBJECTIVE_WAYPOINT_SCENE.instantiate() as Node3D
+	if _objective_waypoint == null:
+		return
+
+	_objective_waypoint.visible = false
+	add_child(_objective_waypoint)
+
+
+func _update_objective_waypoint():
+	if _objective_waypoint == null:
+		return
+
+	if _dialogue_active or _is_transitioning or _current_quest_index >= QUESTS.size():
+		if _objective_waypoint.has_method("clear_target"):
+			_objective_waypoint.call("clear_target")
+		else:
+			_objective_waypoint.visible = false
+		return
+
+	var objective := _find_waypoint_objective()
+	if objective.is_empty():
+		if _objective_waypoint.has_method("clear_target"):
+			_objective_waypoint.call("clear_target")
+		else:
+			_objective_waypoint.visible = false
+		return
+
+	var objective_id := String(objective["id"])
+	var target_node: Node3D = _objective_nodes.get(objective_id)
+	if target_node == null:
+		_objective_waypoint.visible = false
+		return
+
+	var target_height := float(objective.get("waypoint_height", objective_waypoint_height))
+	var raw_target_offset: Variant = objective.get("waypoint_offset", Vector3.ZERO)
+	var target_offset: Vector3 = raw_target_offset if raw_target_offset is Vector3 else Vector3.ZERO
+
+	var target_position := target_node.global_position + Vector3.UP * target_height + target_offset
+	if _objective_waypoint.has_method("set_world_target"):
+		_objective_waypoint.call("set_world_target", target_position)
+	_objective_waypoint.visible = true
+
+
 func _show_intro_dialogue():
 	_dialogue_active = true
 	_dialogue_overlay.visible = true
 	_quest_panel.visible = false
 	_prompt_panel.visible = false
+	_tutorial_panel.visible = false
 	_set_player_controls_locked(true)
 
 
@@ -229,6 +325,8 @@ func _hide_intro_dialogue():
 	_quest_panel.visible = true
 	_set_player_controls_locked(false)
 	_update_quest_ui()
+
+	_show_next_tutorial_hint()
 
 
 func _set_player_controls_locked(is_locked: bool):
@@ -292,11 +390,99 @@ func _ensure_input_action(action_name: StringName, keycode: Key):
 		InputMap.add_action(action_name)
 
 	for existing_event in InputMap.action_get_events(action_name):
-		InputMap.action_erase_event(action_name, existing_event)
+		if existing_event is InputEventKey and existing_event.physical_keycode == keycode:
+			return
 
 	var event := InputEventKey.new()
 	event.physical_keycode = keycode
 	InputMap.action_add_event(action_name, event)
+
+
+func _connect_tutorial_triggers():
+	var tutorial_callback := Callable(self, "_on_tutorial_requested")
+	for node in get_tree().get_nodes_in_group(TUTORIAL_TRIGGER_GROUP):
+		if not is_ancestor_of(node):
+			continue
+		if not node.is_connected("tutorial_requested", tutorial_callback):
+			node.connect("tutorial_requested", tutorial_callback)
+
+
+func _on_tutorial_requested(trigger: Node3D, body: Node3D):
+	if body != _player or _is_transitioning:
+		return
+
+	if trigger == null or not trigger.has_method("get_tutorial_hint_data"):
+		return
+
+	var hint_data: Dictionary = trigger.call("get_tutorial_hint_data")
+	if _dialogue_active:
+		_enqueue_tutorial_hint(hint_data)
+		return
+
+	_enqueue_tutorial_hint(hint_data)
+
+
+func _enqueue_tutorial_hint(hint_data: Dictionary) -> void:
+	if hint_data.is_empty():
+		return
+
+	_pending_tutorial_hints.append(hint_data)
+	if _dialogue_active or _tutorial_panel.visible:
+		return
+
+	_show_next_tutorial_hint()
+
+
+func _show_next_tutorial_hint() -> void:
+	if _dialogue_active:
+		return
+
+	while not _pending_tutorial_hints.is_empty():
+		var raw_next_hint: Variant = _pending_tutorial_hints.pop_front()
+		var next_hint: Dictionary = raw_next_hint if raw_next_hint is Dictionary else {}
+		if _show_tutorial_hint_data(next_hint):
+			return
+
+	_tutorial_panel.visible = false
+
+
+func _show_tutorial_hint_data(hint_data: Dictionary) -> bool:
+	if hint_data.is_empty():
+		return false
+
+	var title := String(hint_data.get("title", "")).strip_edges()
+	var body := String(hint_data.get("body", "")).strip_edges()
+	if title == "" and body == "":
+		return false
+
+	var hint_id := _resolve_tutorial_hint_id(hint_data, title, body)
+	var should_show_once := bool(hint_data.get("show_once", true))
+	if should_show_once and _shown_tutorial_hints.has(hint_id):
+		return false
+
+	if should_show_once:
+		_shown_tutorial_hints[hint_id] = true
+
+	var duration := maxf(float(hint_data.get("duration", 5.0)), 0.5)
+	_tutorial_title_label.text = title
+	_tutorial_title_label.visible = title != ""
+	_tutorial_body_label.text = body
+	_tutorial_panel.visible = true
+	_tutorial_timer.start(duration)
+	return true
+
+
+func _resolve_tutorial_hint_id(hint_data: Dictionary, title: String, body: String) -> String:
+	var explicit_id := String(hint_data.get("hint_id", "")).strip_edges()
+	if explicit_id != "":
+		return explicit_id
+
+	return "%s|%s" % [title, body]
+
+
+func _on_tutorial_timer_timeout():
+	_tutorial_panel.visible = false
+	_show_next_tutorial_hint()
 
 
 func _build_ui():
@@ -424,6 +610,38 @@ func _build_ui():
 	_status_label.add_theme_font_size_override("font_size", 20)
 	status_margin.add_child(_status_label)
 
+	_tutorial_panel = PanelContainer.new()
+	_tutorial_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_tutorial_panel.offset_left = -392.0
+	_tutorial_panel.offset_right = -24.0
+	_tutorial_panel.offset_top = 128.0
+	_tutorial_panel.offset_bottom = 286.0
+	_tutorial_panel.add_theme_stylebox_override("panel", _panel_style(Color(0.1, 0.13, 0.17, 0.94)))
+	_tutorial_panel.visible = false
+	canvas_layer.add_child(_tutorial_panel)
+
+	var tutorial_margin := MarginContainer.new()
+	tutorial_margin.add_theme_constant_override("margin_left", 18)
+	tutorial_margin.add_theme_constant_override("margin_top", 16)
+	tutorial_margin.add_theme_constant_override("margin_right", 18)
+	tutorial_margin.add_theme_constant_override("margin_bottom", 16)
+	_tutorial_panel.add_child(tutorial_margin)
+
+	var tutorial_vbox := VBoxContainer.new()
+	tutorial_vbox.add_theme_constant_override("separation", 8)
+	tutorial_margin.add_child(tutorial_vbox)
+
+	_tutorial_title_label = Label.new()
+	_tutorial_title_label.add_theme_color_override("font_color", Color(0.99, 0.99, 0.99))
+	_tutorial_title_label.add_theme_font_size_override("font_size", 22)
+	tutorial_vbox.add_child(_tutorial_title_label)
+
+	_tutorial_body_label = Label.new()
+	_tutorial_body_label.add_theme_color_override("font_color", Color(0.87, 0.92, 0.97))
+	_tutorial_body_label.add_theme_font_size_override("font_size", 18)
+	_tutorial_body_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	tutorial_vbox.add_child(_tutorial_body_label)
+
 	_status_timer = Timer.new()
 	_status_timer.one_shot = true
 	_status_timer.wait_time = 2.0
@@ -434,6 +652,11 @@ func _build_ui():
 	_level_transition_timer.one_shot = true
 	_level_transition_timer.timeout.connect(_on_level_transition_timeout)
 	add_child(_level_transition_timer)
+
+	_tutorial_timer = Timer.new()
+	_tutorial_timer.one_shot = true
+	_tutorial_timer.timeout.connect(_on_tutorial_timer_timeout)
+	add_child(_tutorial_timer)
 
 
 func _panel_style(background: Color) -> StyleBoxFlat:

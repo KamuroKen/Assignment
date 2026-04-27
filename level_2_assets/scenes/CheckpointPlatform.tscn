@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_checkpoint.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://1bya5ry4d4ew" path="res://level_2_assets/scripts/level_2_checkpoint.gd" id="1_script"]
 
 [sub_resource type="BoxShape3D" id="1_platform_shape"]
 size = Vector3(7, 1, 7)

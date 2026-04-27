@@ -13,7 +13,7 @@ const BEACON_ACTIVE_EMISSION := 1.35
 @export var tutorial_hint_id := "checkpoint_intro"
 @export var tutorial_title := "Checkpoint"
 @export_multiline var tutorial_body := "If you fall, you will restart from here."
-@export_range(1.0, 12.0, 0.1) var tutorial_duration := 4.5
+@export_range(1.0, 12.0, 0.1) var tutorial_duration := 3.0
 @export var tutorial_show_once := true
 
 var _is_active := false

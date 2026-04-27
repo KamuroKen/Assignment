@@ -26,3 +26,16 @@ func _on_trigger_body_entered(body: Node3D) -> void:
 
 func _on_trigger_body_exited(body: Node3D) -> void:
 	player_exited.emit(self, body)
+
+
+func play_finish_vfx() -> void:
+	if Engine.is_editor_hint():
+		return
+
+	for node_name in ["ConfettiLeft", "ConfettiRight"]:
+		var particles := get_node_or_null(node_name) as GPUParticles3D
+		if particles == null:
+			continue
+		particles.emitting = false
+		particles.restart()
+		particles.emitting = true

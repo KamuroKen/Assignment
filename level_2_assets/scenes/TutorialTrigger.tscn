@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://level_2_assets/scripts/level_2_tutorial_trigger.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://8k0kemqd6hwo" path="res://level_2_assets/scripts/level_2_tutorial_trigger.gd" id="1_script"]
 
 [sub_resource type="BoxShape3D" id="1_shape"]
 size = Vector3(4, 3, 4)

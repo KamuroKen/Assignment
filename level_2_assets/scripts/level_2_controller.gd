@@ -8,6 +8,13 @@ const TUTORIAL_TRIGGER_GROUP := "level_2_tutorial_trigger"
 
 @export_node_path("CharacterBody3D") var player_path: NodePath = ^"Player3D"
 @export_file("*.tscn") var next_scene_path := ""
+@export_group("Level Intro")
+@export var show_level_intro := true
+@export var level_intro_title := "Running Late"
+@export_multiline var level_intro_body := "I made it out of the house, but now I'm running late for university.\nThe fastest way forward is straight ahead, and I need to keep moving.\nIf I want to make it to class, I have to cross this route and reach the end."
+@export var level_intro_skip_text := "Press Q to continue"
+
+@export_group("Finish")
 @export var require_interact_for_finish := true
 @export var finish_delay := 1.75
 @export var checkpoint_message_duration := 1.35
@@ -24,6 +31,7 @@ var _active_checkpoint: Node
 var _finish_target: Node
 var _is_player_near_finish := false
 var _is_finishing := false
+var _is_level_intro_active := false
 
 var _finish_timer: Timer
 var _message_timer: Timer
@@ -35,7 +43,12 @@ var _message_label: Label
 var _tutorial_panel: PanelContainer
 var _tutorial_title_label: Label
 var _tutorial_body_label: Label
+var _level_intro_overlay: ColorRect
+var _level_intro_title_label: Label
+var _level_intro_body_label: Label
+var _level_intro_hint_label: Label
 var _shown_tutorial_hints: Dictionary = {}
+var _pending_tutorial_hint: Dictionary = {}
 
 
 func _ready() -> void:
@@ -50,10 +63,16 @@ func _ready() -> void:
 	_build_ui()
 	_connect_level_nodes()
 	_reset_checkpoint_progress()
+	_show_level_intro_dialogue()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _is_finishing or not require_interact_for_finish:
+	if _is_level_intro_active and event.is_action_pressed("dialog_skip"):
+		_hide_level_intro_dialogue()
+		get_viewport().set_input_as_handled()
+		return
+
+	if _is_level_intro_active or _is_finishing or not require_interact_for_finish:
 		return
 
 	if _is_player_near_finish and event.is_action_pressed("interact"):
@@ -129,6 +148,8 @@ func _complete_level() -> void:
 	if _is_finishing:
 		return
 
+	var finish_target := _finish_target
+
 	_is_finishing = true
 	_is_player_near_finish = false
 	_finish_target = null
@@ -139,13 +160,16 @@ func _complete_level() -> void:
 	_message_label.text = finish_message_text
 	_message_panel.visible = true
 
+	if finish_target != null and finish_target.has_method("play_finish_vfx"):
+		finish_target.call("play_finish_vfx")
+
 	if _player.has_method("set_controls_locked"):
 		_player.call("set_controls_locked", true)
 
 	_finish_timer.start(finish_delay)
 
 
-func _respawn_player(position: Vector3, rotation_value: Vector3) -> void:
+func _respawn_player(respawn_position: Vector3, rotation_value: Vector3) -> void:
 	_is_player_near_finish = false
 	_finish_target = null
 	_prompt_panel.visible = false
@@ -155,7 +179,7 @@ func _respawn_player(position: Vector3, rotation_value: Vector3) -> void:
 		_player.call("set_controls_locked", false)
 
 	_player.velocity = Vector3.ZERO
-	_player.global_position = position
+	_player.global_position = respawn_position
 	_player.global_rotation = rotation_value
 
 
@@ -228,7 +252,12 @@ func _on_tutorial_requested(trigger: Node3D, body: Node3D) -> void:
 	if trigger == null or not trigger.has_method("get_tutorial_hint_data"):
 		return
 
-	_show_tutorial_hint_data(trigger.call("get_tutorial_hint_data"))
+	var hint_data: Dictionary = trigger.call("get_tutorial_hint_data")
+	if _is_level_intro_active:
+		_pending_tutorial_hint = hint_data
+		return
+
+	_show_tutorial_hint_data(hint_data)
 
 
 func _show_tutorial_hint_data(hint_data: Dictionary) -> void:
@@ -254,6 +283,40 @@ func _show_tutorial_hint_data(hint_data: Dictionary) -> void:
 	_tutorial_body_label.text = body
 	_tutorial_panel.visible = true
 	_tutorial_timer.start(duration)
+
+
+func _show_level_intro_dialogue() -> void:
+	if not show_level_intro:
+		return
+
+	var title := level_intro_title.strip_edges()
+	var body := level_intro_body.strip_edges()
+	if title == "" and body == "":
+		return
+
+	_is_level_intro_active = true
+	_level_intro_title_label.text = title
+	_level_intro_body_label.text = body
+	_level_intro_hint_label.text = level_intro_skip_text
+	_level_intro_overlay.visible = true
+	_tutorial_panel.visible = false
+	_set_player_controls_locked(true)
+
+
+func _hide_level_intro_dialogue() -> void:
+	_is_level_intro_active = false
+	_level_intro_overlay.visible = false
+	_set_player_controls_locked(false)
+
+	if not _pending_tutorial_hint.is_empty():
+		var pending_hint := _pending_tutorial_hint
+		_pending_tutorial_hint = {}
+		_show_tutorial_hint_data(pending_hint)
+
+
+func _set_player_controls_locked(is_locked: bool) -> void:
+	if _player.has_method("set_controls_locked"):
+		_player.call("set_controls_locked", is_locked)
 
 
 func _resolve_tutorial_hint_id(hint_data: Dictionary, title: String, body: String) -> String:
@@ -352,6 +415,47 @@ func _build_ui() -> void:
 	_tutorial_body_label.add_theme_color_override("font_color", Color(0.87, 0.92, 0.97))
 	_tutorial_body_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tutorial_vbox.add_child(_tutorial_body_label)
+
+	_level_intro_overlay = ColorRect.new()
+	_level_intro_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_level_intro_overlay.color = Color(0.0, 0.0, 0.0, 0.55)
+	_level_intro_overlay.visible = false
+	canvas_layer.add_child(_level_intro_overlay)
+
+	var level_intro_panel := PanelContainer.new()
+	level_intro_panel.set_anchors_preset(Control.PRESET_CENTER)
+	level_intro_panel.custom_minimum_size = Vector2(680.0, 0.0)
+	level_intro_panel.position = Vector2(-340.0, -120.0)
+	level_intro_panel.add_theme_stylebox_override("panel", _create_panel_style(Color(0.09, 0.11, 0.14, 0.96)))
+	_level_intro_overlay.add_child(level_intro_panel)
+
+	var level_intro_margin := MarginContainer.new()
+	level_intro_margin.add_theme_constant_override("margin_left", 22)
+	level_intro_margin.add_theme_constant_override("margin_top", 20)
+	level_intro_margin.add_theme_constant_override("margin_right", 22)
+	level_intro_margin.add_theme_constant_override("margin_bottom", 18)
+	level_intro_panel.add_child(level_intro_margin)
+
+	var level_intro_vbox := VBoxContainer.new()
+	level_intro_vbox.add_theme_constant_override("separation", 12)
+	level_intro_margin.add_child(level_intro_vbox)
+
+	_level_intro_title_label = Label.new()
+	_level_intro_title_label.add_theme_color_override("font_color", Color(0.99, 0.99, 0.99))
+	_level_intro_title_label.add_theme_font_size_override("font_size", 26)
+	level_intro_vbox.add_child(_level_intro_title_label)
+
+	_level_intro_body_label = Label.new()
+	_level_intro_body_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_level_intro_body_label.add_theme_color_override("font_color", Color(0.9, 0.93, 0.97))
+	_level_intro_body_label.add_theme_font_size_override("font_size", 22)
+	level_intro_vbox.add_child(_level_intro_body_label)
+
+	_level_intro_hint_label = Label.new()
+	_level_intro_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_level_intro_hint_label.add_theme_color_override("font_color", Color(0.76, 0.83, 0.92))
+	_level_intro_hint_label.add_theme_font_size_override("font_size", 18)
+	level_intro_vbox.add_child(_level_intro_hint_label)
 
 	_finish_timer = Timer.new()
 	_finish_timer.one_shot = true

@@ -1,0 +1,289 @@
+[gd_scene format=3 uid="uid://ds4fgprmf1r0w"]
+
+[ext_resource type="Script" uid="uid://cwso1tdni3u5l" path="res://menu/main_menu.gd" id="1_jc45y"]
+[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://environment/sky_with_stars.tres" id="2_s8mfa"]
+[ext_resource type="Texture2D" uid="uid://bvyfaw00gegpk" path="res://environment/new_curve_texture.tres" id="3_0tw43"]
+[ext_resource type="Texture2D" uid="uid://bcbwjxb2g4yn0" path="res://environment/moon.png" id="4_youj7"]
+[ext_resource type="Texture2D" uid="uid://b2wxr615juimc" path="res://environment/new_noise_texture_2d.tres" id="5_l5uyn"]
+[ext_resource type="AudioStream" uid="uid://v5jhwdohfxvw" path="res://music/soundgallerybydmitrytaras-morning-lofi-chill-music-372718.mp3" id="6_s8mfa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qtwp"]
+shader = ExtResource("2_s8mfa")
+shader_parameter/top_color = Color(0.2901961, 0.18431373, 1, 1)
+shader_parameter/bottom_color = Color(1, 0.46666667, 0, 1)
+shader_parameter/gradient_curve = ExtResource("3_0tw43")
+shader_parameter/noise_texture = ExtResource("5_l5uyn")
+shader_parameter/moon_texture = ExtResource("4_youj7")
+shader_parameter/moon_direction = Vector3(-1.08, 0.305, 1.36)
+shader_parameter/moon_size = 0.045
+
+[sub_resource type="Sky" id="2_sky"]
+sky_material = SubResource("ShaderMaterial_8qtwp")
+
+[sub_resource type="Environment" id="Environment_dy7ct"]
+background_mode = 2
+sky = SubResource("2_sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.7490196, 0.7411765, 0.6156863, 1)
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_exposure = 1.05
+ssr_enabled = true
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.4
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.6824724, 0.44220075, 0.7453601, 1)
+fog_light_energy = 0.9
+fog_sky_affect = 0.01
+volumetric_fog_density = 0.01
+volumetric_fog_emission = Color(0.44313726, 0.65882355, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.12941177, 0.07450981, 0.2, 0.78)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.79607844, 0.9137255, 0.32)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.24705882, 0.12941177, 0.31764707, 0.9)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.43137255, 0.21960784, 0.5058824, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.36078432, 0.1882353, 0.4392157, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.8, 0.92156863, 0.45)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.8901961, 0.9647059, 0.85)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MainMenu" type="Node3D" unique_id=558057567]
+script = ExtResource("1_jc45y")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=798480304]
+environment = SubResource("Environment_dy7ct")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=202244462]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -7.305891, 12.363483, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=876214096]
+unique_name_in_owner = true
+transform = Transform3D(-0.9800429, 0, 0.19878636, 0, 1, 0, -0.19878636, 0, -0.9800429, 0, 2, 8)
+current = true
+fov = 65.0
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1211868818]
+stream = ExtResource("6_s8mfa")
+volume_db = -40.0
+autoplay = true
+parameters/looping = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1525333560]
+unique_name_in_owner = true
+
+[node name="Root" type="Control" parent="CanvasLayer" unique_id=2131958077]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScreenTint" type="ColorRect" parent="CanvasLayer/Root" unique_id=1437427072]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08627451, 0.03529412, 0.13333334, 0.12)
+
+[node name="MenuPanel" type="PanelContainer" parent="CanvasLayer/Root" unique_id=554981816]
+layout_mode = 1
+offset_left = 72.0
+offset_top = 76.0
+offset_right = 488.0
+offset_bottom = 488.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MenuPadding" type="MarginContainer" parent="CanvasLayer/Root/MenuPanel" unique_id=1596611998]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 28
+
+[node name="MenuVBox" type="VBoxContainer" parent="CanvasLayer/Root/MenuPanel/MenuPadding" unique_id=131235091]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Root/MenuPanel/MenuPadding/MenuVBox" unique_id=1584027378]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.94509804, 0.9882353, 1)
+theme_override_font_sizes/font_size = 52
+text = "A Day in the Life"
+
+[node name="SubtitleLabel" type="Label" parent="CanvasLayer/Root/MenuPanel/MenuPadding/MenuVBox" unique_id=1779549360]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8352941, 0.93333334, 0.8)
+theme_override_font_sizes/font_size = 18
+text = "A short interactive experience"
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Root/MenuPanel/MenuPadding/MenuVBox" unique_id=2022288361]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Root/MenuPanel/MenuPadding/MenuVBox" unique_id=1079070464]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.99215686, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Play"
+
+[node name="CreditsButton" type="Button" parent="CanvasLayer/Root/MenuPanel/MenuPadding/MenuVBox" unique_id=423995838]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.99215686, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Credits"
+
+[node name="HintLabel" type="Label" parent="CanvasLayer/Root/MenuPanel/MenuPadding/MenuVBox" unique_id=245105077]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85882354, 0.94509804, 0.7)
+theme_override_font_sizes/font_size = 15
+text = "Open Credits to view asset attributions."
+autowrap_mode = 3
+
+[node name="CreditsPanel" type="PanelContainer" parent="CanvasLayer/Root" unique_id=252223319]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -564.0
+offset_top = -244.0
+offset_right = -72.0
+offset_bottom = 244.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="CreditsPadding" type="MarginContainer" parent="CanvasLayer/Root/CreditsPanel" unique_id=1673177923]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="CreditsVBox" type="VBoxContainer" parent="CanvasLayer/Root/CreditsPanel/CreditsPadding" unique_id=1051925781]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="CreditsHeader" type="HBoxContainer" parent="CanvasLayer/Root/CreditsPanel/CreditsPadding/CreditsVBox" unique_id=12057951]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CreditsTitle" type="Label" parent="CanvasLayer/Root/CreditsPanel/CreditsPadding/CreditsVBox/CreditsHeader" unique_id=1121914990]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.94509804, 0.9882353, 1)
+theme_override_font_sizes/font_size = 36
+text = "Credits"
+
+[node name="CloseCreditsButton" type="Button" parent="CanvasLayer/Root/CreditsPanel/CreditsPadding/CreditsVBox/CreditsHeader" unique_id=737939157]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(92, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.99215686, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Close"
+
+[node name="CreditsBody" type="RichTextLabel" parent="CanvasLayer/Root/CreditsPanel/CreditsPadding/CreditsVBox" unique_id=494360067]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.8901961, 0.9529412, 0.92)
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[b]Project[/b]
+- A Day in the Life
+- Interactive experience created for the assignment:
+  \"A Day in the Life of a First Year Game Design Student\"
+- Developed in Godot.
+
+[b]Sound[/b]
+- Home / Morning Routine Level:
+   \"Lo Fi Hip Hop (Cozy Morning)\"
+   by Alex_Kizenkov
+   Source: Pixabay
+
+- Main Menu / Calm Background Music:
+  \"Morning Lofi Chill Music\"
+  by SoundGalleryByDmitryTaras
+  Source: Pixabay
+
+- Parkour / Travelling to University Level:
+   \"Game Background Loop – Uplifting Adventure Music Loop\"
+   by Cyberwave-Orchestra
+   Source: Pixabay
+
+[b]Environment Asset[/b]
+- Furniture Kit by Kenney.
+- Used for 3D environment/furniture assets in the project.
+- License: Creative Commons CC0 / Public Domain.
+- Source: https://www.kenney.nl/assets/furniture-kit
+"

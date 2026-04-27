@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialTrigger.tscn" id="1_base"]
+
+[node name="TutorialBasics" instance=ExtResource("1_base")]
+hint_id = "movement_intro"
+tutorial_title = "Controls"
+tutorial_body = "Move with WASD.\nJump with Space.\nRotate the camera with the mouse."
+tutorial_duration = 6.0
+show_once = true
+trigger_if_player_starts_inside = true

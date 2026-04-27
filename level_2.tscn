@@ -1,0 +1,247 @@
+[gd_scene format=3 uid="uid://culotiwsu6pht"]
+
+[ext_resource type="Script" uid="uid://cuphl35ayrh6k" path="res://level_2_assets/scripts/level_2_controller.gd" id="1_i558w"]
+[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://environment/sky_with_stars.tres" id="2_pp4kl"]
+[ext_resource type="Texture2D" uid="uid://bvyfaw00gegpk" path="res://environment/new_curve_texture.tres" id="3_63fe8"]
+[ext_resource type="Texture2D" uid="uid://bcbwjxb2g4yn0" path="res://environment/moon.png" id="4_lojn2"]
+[ext_resource type="Texture2D" uid="uid://b2wxr615juimc" path="res://environment/new_noise_texture_2d.tres" id="5_b86k7"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/StaticPlatform.tscn" id="6_cuxq2"]
+[ext_resource type="AudioStream" uid="uid://060d1tphxo7a" path="res://music/cyberwave-orchestra-game-background-loop-uplifting-adventure-music-loop-248804.mp3" id="6_i558w"]
+[ext_resource type="PackedScene" uid="uid://j2ksih2r28a3" path="res://level_2_assets/scenes/platform_short_ramp.tscn" id="7_wvr33"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/CheckpointPlatform.tscn" id="8_sgm4o"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/RotatingPlatform.tscn" id="9_6r3eb"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialLedgeGrab.tscn" id="10_2pufk"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/MovingPlatform.tscn" id="11_btc8u"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialWallSlide.tscn" id="12_ikghu"]
+[ext_resource type="PackedScene" uid="uid://dm2v1jqrkp117" path="res://level_2_assets/scenes/ParkourWall.tscn" id="13_i6smf"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TeleportTarget.tscn" id="14_d4rhq"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TeleportEntrance.tscn" id="15_ldfcd"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/TutorialTeleport.tscn" id="16_41lt0"]
+[ext_resource type="PackedScene" path="res://level_2_assets/scenes/FinishPlatform.tscn" id="17_t8cg7"]
+[ext_resource type="PackedScene" uid="uid://10cl507nu5os" path="res://player/player_3d.tscn" id="18_dpyky"]
+[ext_resource type="Script" uid="uid://c06v14qs8j5tq" path="res://level_2_assets/scripts/kill_plane.gd" id="19_o5ykh"]
+
+[sub_resource type="ShaderMaterial" id="1_sky_material"]
+shader = ExtResource("2_pp4kl")
+shader_parameter/top_color = Color(0.2901961, 0.18431373, 1, 1)
+shader_parameter/bottom_color = Color(1, 0.46666667, 0, 1)
+shader_parameter/gradient_curve = ExtResource("3_63fe8")
+shader_parameter/noise_texture = ExtResource("5_b86k7")
+shader_parameter/moon_texture = ExtResource("4_lojn2")
+shader_parameter/moon_direction = Vector3(-1.08, 0.305, 1.36)
+shader_parameter/moon_size = 0.045
+
+[sub_resource type="Sky" id="2_sky"]
+sky_material = SubResource("1_sky_material")
+
+[sub_resource type="Environment" id="3_environment"]
+background_mode = 2
+sky = SubResource("2_sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.7490196, 0.7411765, 0.6156863, 1)
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_exposure = 1.05
+ssr_enabled = true
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.4
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.6824724, 0.44220075, 0.7453601, 1)
+fog_light_energy = 0.9
+fog_sky_affect = 0.01
+volumetric_fog_density = 0.01
+volumetric_fog_emission = Color(0.44313726, 0.65882355, 0, 1)
+
+[sub_resource type="BoxShape3D" id="4_kill_plane_shape"]
+size = Vector3(2017.7839, 1.3837891, 1445.5068)
+
+[node name="Level2" type="Node3D" unique_id=1336825804]
+script = ExtResource("1_i558w")
+next_scene_path = "res://menu/main_menu.tscn"
+require_interact_for_finish = false
+finish_delay = 3.5
+finish_message_text = "You completed the game.
+Thanks for playing!"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1752658103]
+environment = SubResource("3_environment")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=70761128]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -7.305891, 12.363483, 0)
+shadow_enabled = true
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=1369212975]
+stream = ExtResource("6_i558w")
+volume_db = -25.0
+autoplay = true
+parameters/looping = true
+
+[node name="Course" type="Node3D" parent="." unique_id=351547054]
+
+[node name="Start" parent="Course" unique_id=56441594 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.0011925697, 9.102753, -20.217514)
+allows_ledge_grab = true
+
+[node name="StaticPlatform2" parent="Course" unique_id=997293777 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(4, 0, 0, 0, 3, 0, 0, 0, 1, -1.2432413, 11.897996, -8.210642)
+allows_ledge_grab = true
+
+[node name="StaticPlatform3" parent="Course" unique_id=1653736197 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(3.4738195, 0, 0, 0, 3, 0, 0, 0, 1, -34.868813, 11.897996, -8.210642)
+allows_ledge_grab = true
+
+[node name="StaticPlatform4" parent="Course" unique_id=1494861742 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(3.4738195, 0, 0, 0, 3, 0, 0, 0, 1, -55.74712, 11.897996, -8.210642)
+allows_ledge_grab = true
+
+[node name="PlatformShortRamp2" parent="Course" unique_id=1982877657 instance=ExtResource("7_wvr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.971716, 10.602753, -16.742908)
+
+[node name="CheckpointPlatform" parent="Course" unique_id=853443834 instance=ExtResource("8_sgm4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.316452, 12.911785, -8.279905)
+shows_tutorial_hint = true
+tutorial_duration = 4.5
+
+[node name="RotatingPlatform" parent="Course" unique_id=1023541006 instance=ExtResource("9_6r3eb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.05697, 13, -8.202)
+
+[node name="RotatingPlatform2" parent="Course" unique_id=25411036 instance=ExtResource("9_6r3eb")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -22.457329, 13, -8.202)
+
+[node name="PlatformShortRamp" parent="Course" unique_id=560168054 instance=ExtResource("7_wvr33")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -59.689266, 13.397996, -8.130453)
+
+[node name="StaticPlatform" parent="Course" unique_id=598092719 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -68.68927, 15.867662, -8.122114)
+allows_ledge_grab = true
+
+[node name="TutorialLedgeGrab" parent="Course" unique_id=859967115 instance=ExtResource("10_2pufk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.981243, 15.397996, -8.086868)
+
+[node name="StaticPlatform5" parent="Course" unique_id=686717927 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1, -81.234, 21, -8.215)
+allows_ledge_grab = true
+
+[node name="StaticPlatform6" parent="Course" unique_id=1182351724 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(3, 0, 0, 0, 8, 0, 0, 0, 1, -116.871, 20.5, -8.215)
+allows_ledge_grab = true
+
+[node name="StaticPlatform7" parent="Course" unique_id=280494151 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(-1.3113416e-07, 0, 1, 0, 8, 0, -3, 0, -4.371139e-08, -141.763, 20.5, 10)
+allows_ledge_grab = true
+
+[node name="StaticPlatform9" parent="Course" unique_id=946868538 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(-1.3113416e-07, 0, 1, 0, 8, 0, -3, 0, -4.371139e-08, -141.55363, 11, 38.669)
+allows_ledge_grab = true
+
+[node name="StaticPlatform10" parent="Course" unique_id=2030634661 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(-1.3113416e-07, 0, 1, 0, 8, 0, -3, 0, -4.371139e-08, -141.55363, 11, 65.8718)
+allows_ledge_grab = true
+
+[node name="StaticPlatform11" parent="Course" unique_id=323504102 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(-1.3113416e-07, 0, 1, 0, 8, 0, -3, 0, -4.371139e-08, -141.55363, 11, 84.89829)
+allows_ledge_grab = true
+
+[node name="StaticPlatform12" parent="Course" unique_id=903051221 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(-1.3113416e-07, 0, 1, 0, 8, 0, -3, 0, -4.371139e-08, -141.55363, 15.418598, 100.94246)
+allows_ledge_grab = true
+
+[node name="StaticPlatform13" parent="Course" unique_id=445023532 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(-1.3113416e-07, 0, 1, 0, 8, 0, -3, 0, -4.371139e-08, -141.71783, 15.418598, 158.4944)
+allows_ledge_grab = true
+
+[node name="StaticPlatform8" parent="Course" unique_id=1479232925 instance=ExtResource("6_cuxq2")]
+transform = Transform3D(4, 0, 0, 0, 8, 0, 0, 0, 1, -137.906, 20.5, -8.215)
+allows_ledge_grab = true
+
+[node name="MovingPlatform" parent="Course" unique_id=1671198052 instance=ExtResource("11_btc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.26729, 18, -8.215)
+move_axis = Vector3(0, 3, 0)
+
+[node name="MovingPlatform2" parent="Course" unique_id=1956604065 instance=ExtResource("11_btc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.14579, 22, -7.951)
+move_axis = Vector3(1, 0, 1)
+
+[node name="MovingPlatform3" parent="Course" unique_id=1648795697 instance=ExtResource("11_btc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97.98896, 22, -7.951)
+move_axis = Vector3(0, 0, -1)
+
+[node name="RotatingPlatform3" parent="Course" unique_id=1230228539 instance=ExtResource("9_6r3eb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105.09728, 22, -8.032)
+
+[node name="CheckpointPlatform2" parent="Course" unique_id=829844959 instance=ExtResource("8_sgm4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.371, 24, -8.24)
+tutorial_duration = 4.5
+
+[node name="TutorialWallSlide" parent="Course" unique_id=1458171899 instance=ExtResource("12_ikghu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -143.66774, 24.5, -8.615689)
+
+[node name="ParkourWall" parent="Course" unique_id=1950973028 instance=ExtResource("13_i6smf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -145.118, 27, -0.5)
+
+[node name="TeleportTarget" parent="Course" unique_id=576077846 instance=ExtResource("14_d4rhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.32707, 18.50287, 36.722202)
+
+[node name="TeleportEntrance" parent="Course" unique_id=1742558205 instance=ExtResource("15_ldfcd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.74426, 25.253664, 22.75767)
+target_path = NodePath("../TeleportTarget")
+
+[node name="TutorialTeleport" parent="Course" unique_id=1900818999 instance=ExtResource("16_41lt0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.1825, 26.5, 16.461132)
+
+[node name="ParkourWall2" parent="Course" unique_id=1438020644 instance=ExtResource("13_i6smf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -143.176, 17, 49.980328)
+
+[node name="ParkourWall3" parent="Course" unique_id=1263005984 instance=ExtResource("13_i6smf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.4457, 17, 54.737694)
+
+[node name="ParkourWall4" parent="Course" unique_id=334508803 instance=ExtResource("13_i6smf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -144.22885, 21.348604, 131.68242)
+
+[node name="ParkourWall6" parent="Course" unique_id=1849443541 instance=ExtResource("13_i6smf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -144.22885, 21.348604, 142.57645)
+
+[node name="ParkourWall5" parent="Course" unique_id=939941810 instance=ExtResource("13_i6smf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -139.01746, 21.348604, 135.56201)
+
+[node name="ParkourWall7" parent="Course" unique_id=1987484894 instance=ExtResource("13_i6smf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -139.15317, 21.348604, 146.77032)
+
+[node name="CheckpointPlatform3" parent="Course" unique_id=1488820109 instance=ExtResource("8_sgm4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.52588, 14.502697, 75.3718)
+tutorial_duration = 4.5
+
+[node name="PlatformShortRamp3" parent="Course" unique_id=1980759661 instance=ExtResource("7_wvr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.55879, 15, 87.8999)
+
+[node name="MovingPlatform4" parent="Course" unique_id=2132790649 instance=ExtResource("11_btc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.56766, 18.923485, 109.628975)
+move_speed = 2.0
+
+[node name="MovingPlatform5" parent="Course" unique_id=481516633 instance=ExtResource("11_btc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.56766, 18.923485, 124.16272)
+move_axis = Vector3(-1, 0, 0)
+move_speed = 2.0
+
+[node name="RotatingPlatform4" parent="Course" unique_id=1208911422 instance=ExtResource("9_6r3eb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.21033, 18.995466, 116.899445)
+speed_degrees = 30.0
+
+[node name="FinishPlatform" parent="Course" unique_id=1080415657 instance=ExtResource("17_t8cg7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.4111, 18.816275, 169.3786)
+
+[node name="Player3D" parent="." unique_id=1428657359 instance=ExtResource("18_dpyky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09296489, 10.469091, -24.971605)
+
+[node name="KillPlane" type="Area3D" parent="." unique_id=1496954236]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 170.08058, 0, 0)
+script = ExtResource("19_o5ykh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillPlane" unique_id=1441817840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -429.26804, -8, 181.47595)
+shape = SubResource("4_kill_plane_shape")
+
+[node name="PlatformShortRamp" parent="." unique_id=985693961 instance=ExtResource("7_wvr33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.76419, 24.5, 13.021203)
