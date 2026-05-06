@@ -86,7 +86,7 @@ sky_material = SubResource("ShaderMaterial_mepok")
 background_mode = 2
 sky = SubResource("Sky_w1mvj")
 ambient_light_source = 3
-ambient_light_color = Color(0.7490196, 0.7411765, 0.6156863, 1)
+ambient_light_color = Color(0.79995877, 0.7163026, 0.64323366, 1)
 reflected_light_source = 1
 tonemap_mode = 2
 tonemap_exposure = 1.05
@@ -94,6 +94,8 @@ ssao_enabled = true
 ssao_radius = 2.0
 ssao_intensity = 1.4
 glow_enabled = true
+fog_enabled = true
+fog_sky_affect = 0.01
 volumetric_fog_density = 0.01
 
 [node name="Home" type="Node3D" unique_id=1425615959]
@@ -103,8 +105,10 @@ script = ExtResource("1_vy7jp")
 environment = SubResource("Environment_lxycn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1982467513]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -7.305891, 12.363483, 0)
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -5.5036783, 34.009666, -3.1215239)
+light_energy = 0.53
 shadow_enabled = true
+directional_shadow_max_distance = 40.0
 
 [node name="HomeMusic" type="AudioStreamPlayer" parent="." unique_id=166417029]
 stream = ExtResource("6_ifpeg")

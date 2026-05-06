@@ -69,6 +69,8 @@ environment = SubResource("3_environment")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=70761128]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -7.305891, 12.363483, 0)
+light_color = Color(0.8, 0.7176471, 0.6431373, 1)
+light_energy = 0.53
 shadow_enabled = true
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=1369212975]
@@ -126,7 +128,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1, -81.234, 21, -8.215)
 allows_ledge_grab = true
 
 [node name="StaticPlatform6" parent="Course" unique_id=1182351724 instance=ExtResource("6_cuxq2")]
-transform = Transform3D(3, 0, 0, 0, 8, 0, 0, 0, 1, -116.871, 20.5, -8.215)
+transform = Transform3D(3, 0, 0, 0, 8.5, 0, 0, 0, 1, -116.871, 20.5, -8.215)
 allows_ledge_grab = true
 
 [node name="StaticPlatform7" parent="Course" unique_id=280494151 instance=ExtResource("6_cuxq2")]

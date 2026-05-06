@@ -100,6 +100,8 @@ environment = SubResource("Environment_dy7ct")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=202244462]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -7.305891, 12.363483, 0)
+light_color = Color(0.8, 0.7176471, 0.6431373, 1)
+light_energy = 0.55
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=876214096]
